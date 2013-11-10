@@ -22,6 +22,70 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.careapp.EventsActivity"
+            android:label="@string/title_activity_events"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.TodoActivity"
+            android:label="@string/title_activity_todo"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.FormsActivity"
+            android:label="@string/title_activity_forms"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.PhotoActivity"
+            android:label="@string/title_activity_photo"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.DirectoryActivity"
+            android:label="@string/title_activity_directory"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.ContactUsActivity"
+            android:label="@string/title_activity_contact_us"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.ResourcesActivity"
+            android:label="@string/title_activity_resources"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.CalendarActivity"
+            android:label="@string/title_activity_calendar"
+            android:parentActivityName="com.example.careapp.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
