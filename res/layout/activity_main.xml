@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,11 +6,65 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:stretchColumns="*" >
+    <TableRow 
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button 
+            android:text="@string/Events" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/events" />
+        <Button 
+            android:text="@string/Todo_List" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/todo" />
+         <Button 
+            android:text="@string/Forms" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/forms" />
+    </TableRow>
+    <TableRow 
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button 
+            android:text="@string/Photos" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/photo" />
+        <Button 
+            android:text="@string/Directory" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/directory" />
+          <Button 
+            android:text="@string/Contact_Us" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/contact_us" />
+    </TableRow>
+    <TableRow 
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button 
+            android:text="@string/Resources" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/resources" />
+        <Button 
+            android:text="@string/Calendar" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/calendar" />
+        <Button 
+            android:text="@string/Events" 
+            android:layout_height="match_parent"
+            android:gravity="center" 
+            android:drawableTop="@drawable/events" />
+    </TableRow>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+</TableLayout>
 
-</RelativeLayout>
