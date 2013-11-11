@@ -4,34 +4,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DirectoryActivity extends Activity {
+	SimpleAdapter simpleAdapter;
+	ArrayList<HashMap<String, String>> directoryMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,6 @@ public class DirectoryActivity extends Activity {
 		setContentView(R.layout.activity_directory);
 
 		//read directory file and fill arraylist with map of info
-		SimpleAdapter sa;
 		ArrayList<HashMap<String,String>> directoryList = new ArrayList<HashMap<String,String>>();
 		Resources resources = this.getResources();
 		String directory = null;
@@ -57,7 +54,7 @@ public class DirectoryActivity extends Activity {
 			directory = directoryBuilder.toString();
 
 			DirectoryParser dp = new DirectoryParser(directory);
-			ArrayList<HashMap<String, String>> directoryMap = dp.getDirectory();
+			directoryMap = dp.getDirectory();
 			if (directoryMap.size() == 0) {
 				throw new Exception("No directory data was found.");
 			}
@@ -92,34 +89,69 @@ public class DirectoryActivity extends Activity {
 		} else {
 
 
-			sa = new SimpleAdapter(this, directoryList,
+			simpleAdapter = new SimpleAdapter(this, directoryList,
 					android.R.layout.two_line_list_item ,
 					new String[] { "line_1","line_2" },
 					new int[] {android.R.id.text1, android.R.id.text2});
-			// setListAdapter( sa );
+
+			ListView listView = (ListView) findViewById(R.id.listView);
+			
+			listView.setAdapter(simpleAdapter);
+			this.registerForContextMenu(listView);
+			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+			    	 DirectoryActivity.this.openContextMenu(view);
+			     }
+			});			
 
 
-			// We get the ListView component from the layout
-			ListView lv = (ListView) findViewById(R.id.listView);
 
-			// This is a simple adapter that accepts as parameter
-			// Context
-			// Data list
-			// The row layout that is used during the row creation
-			// The keys used to retrieve the data
-			// The View id used to show the data. The key number and the view id must match
-			//	    SimpleAdapter simpleAdpt = new SimpleAdapter(this, 
-			//	    											 planetsList, 
-			//	    											 android.R.layout.simple_list_item_1, 
-			//	    											 new String[] {"planet"}, 
-			//	    											 new int[] {android.R.id.text1});
-
-			lv.setAdapter(sa);
-		}
+		} // end else
 
 
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenuInfo contextMenuInfo) {
+		super.onCreateContextMenu(contextMenu, view, contextMenuInfo);
+		AdapterContextMenuInfo adapterContextMenuInfo = (AdapterContextMenuInfo) contextMenuInfo;
+
+		if (simpleAdapter != null) {
+			contextMenu.setHeaderTitle("Options");
+			contextMenu.add(adapterContextMenuInfo.position, 1, 1, "Visit webpage");
+			contextMenu.add(adapterContextMenuInfo.position, 2, 2, "Call");
+		}
+
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem menuItem) {
+	    int listId = menuItem.getGroupId();
+	    if (menuItem.getItemId() == 1) { //needs some work
+	    	try {
+	    		Uri url = Uri.parse(directoryMap.get(listId).get("link"));
+	    		if (url == null || (url == Uri.EMPTY)) {
+	    			throw new Exception("Error: Invalid url.");
+	    		}
+	    		startActivity(new Intent(Intent.ACTION_VIEW, url));
+	    	} catch (Exception e) {
+	    		Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+	    	}
+	    } else if (menuItem.getItemId() == 2) {
+	    	try {
+	    		Uri tele = Uri.parse("tel:" + directoryMap.get(listId).get("phone"));
+	    		if (tele == null || (tele == Uri.EMPTY)) {
+	    			throw new Exception("Error: Invalid phone number.");
+	    		}
+	    		startActivity(new Intent(Intent.ACTION_CALL, tele)); 	             
+	    	} catch (Exception e) {
+	    		Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+	    	}
+	    }
+	    return true;
 	}
 
 	/**

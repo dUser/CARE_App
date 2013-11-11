@@ -16,8 +16,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -28,7 +26,8 @@ public class MainActivity extends Activity {
     //button listeners
     public void onEventsButton(View view) {
     	Intent intent = new Intent(this, EventsActivity.class);
-        startActivity(intent);    	
+        startActivity(intent);    
+        
     }
     public void onTodoButton(View view) {
     	Intent intent = new Intent(this, TodoActivity.class);
@@ -38,10 +37,13 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, FormsActivity.class);
         startActivity(intent);     	
     }
+    
     public void onPhotoButton(View view) {
     	Intent intent = new Intent(this, PhotoActivity.class);
         startActivity(intent);    	
     }
+    
+    
     public void onDirectoryButton(View view) {
     	Intent intent = new Intent(this, DirectoryActivity.class);
         startActivity(intent);    	
