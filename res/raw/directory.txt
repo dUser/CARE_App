@@ -1,0 +1,71 @@
+<listing> 
+		<name>Center for Academic Advising<name>
+		<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=123&pageID=1<link>
+		<phone>609-652-4504<phone> 
+<listing>
+<listing> 
+		<name>Campus Police<name>
+		<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=48&pageID=1<link>
+		<phone>609-652-4390<phone> 
+<listing>
+<listing> 
+		<name>Counseling Service<name>
+		<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=61&pageID=6<link>
+		<phone>609-652-4722<phone>
+<listing>
+<listing> 
+	<name>Dean of Students<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=21&pageID=1<link>
+	<phone>609-652-4645<phone> 
+<listing>
+<listing> 
+	<name>Event Services & Campus Ctr. Operations (Student Life Programming)<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=108&pageID=32<link>
+	<phone>609-652-4878<phone>
+<listing>
+<listing> 
+	<name>Health Services<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=61&pageID=2<link>
+	<phone>609-652-4701<phone>
+<listing>
+<listing> 
+	<name>International Student Services<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=120&pageID=31<link>
+	<phone>609-652-4235<phone>
+<listing>
+<listing> 
+	<name>Math Tutoring Center<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=70&pageID=3<link>
+	<phone>609-652-4897<phone>
+<listing>
+<listing> 
+	<name>Office of Financial Aid<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=91&pageID=35<link>
+	<phone>609-652-4203<phone>
+<listing>
+<listing>
+	<name>Office of Student Rights and Responsibilities<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=225&pageID=1<link>
+	<phone>609-626-3585<phone>
+<listing> 
+	<name>Office of Student Development (Commuter Students)<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=131&pageID=10<link>
+	<phone>609-652-4205<phone>
+<listing>
+<listing> 
+	<name>Office of Residential Life<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=128&pageID=1<link>
+	<phone>609-652-4332<phone>		
+<listing>
+<listing> 
+	<name>Richard E. Bjork Library<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=86&pageID=1<link>
+	<phone>609-652-4266<phone>
+<listing>
+<listing> 
+	<name>Writing Tutoring Center<name>
+	<link>http://intraweb.stockton.edu/eyos/page.cfm?siteID=70&pageID=2<link>
+	<phone>609-652-4441<phone>
+<listing>					
+
+

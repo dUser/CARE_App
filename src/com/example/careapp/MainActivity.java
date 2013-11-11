@@ -9,6 +9,7 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -23,7 +24,6 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
     
     //button listeners
     public void onEventsButton(View view) {
