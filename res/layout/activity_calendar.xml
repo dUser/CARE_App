@@ -12,5 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="activity_calendar.xml" />
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Create Event" />
 
 </RelativeLayout>
