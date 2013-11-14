@@ -35,5 +35,7 @@
     <string name="Active">Active Reading</string>
     <string name="Test">Test Anxiety</string>
     <string name="Habits">Winning Habits</string>
+    <string name="add">Add</string>
+    <string name="submit_changes">Submit Changes</string>
 
 </resources>

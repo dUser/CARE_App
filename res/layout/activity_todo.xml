@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,11 +6,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".TodoActivity" >
-
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".TodoActivity"
+    android:orientation="vertical" >
+ 
+	<Button
+        android:id="@+id/add_todo_button"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="activity_todo.xml" />
+        android:text="@string/add"
+        android:onClick="onAdd" />
+	
+	
+	
+	<ListView android:id="@+id/todo_listView"
+	    android:layout_height="0dip"
+	    android:layout_width="match_parent"
+	    android:layout_weight="1" />
+	<TextView
+	    android:id="@+id/TodoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+	
 
-</RelativeLayout>
+	
+	<Button
+        android:id="@+id/submit_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_changes"
+        android:onClick="onSubmitChanges" />
+
+</LinearLayout>
