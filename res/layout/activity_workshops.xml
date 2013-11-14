@@ -6,56 +6,56 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ResourcesActivity"
+    tools:context=".WorkshopsActivity"
     android:stretchColumns="*" >
     <TableRow         
         android:gravity="center">
         <Button 
-            android:onClick="onJoinButton"
-            android:text="@string/Join_Us" 
+            android:onClick="onGoalButton"
+            android:text="@string/Goal" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/forms"
+            android:drawableTop="@drawable/events"
             android:layout_width="0dip"
             android:layout_weight="1" />
         <Button 
-            android:onClick="onOfficesButton"
-            android:text="@string/Offices" 
+            android:onClick="onTimeButton"
+            android:text="@string/Time" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/directory"
+            android:drawableTop="@drawable/todo"
             android:layout_width="0dip"
             android:layout_weight="1" />
          <Button
-            android:onClick="onImprovementButton" 
-            android:text="@string/Improvement" 
+            android:onClick="onDebtButton" 
+            android:text="@string/Debt" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/todo" 
+            android:drawableTop="@drawable/forms" 
             android:layout_width="0dip"
             android:layout_weight="1" />            
     </TableRow>
     <TableRow         
         android:gravity="center">
         <Button
-            android:onClick="onUpdateButton"  
-            android:text="@string/Update" 
+            android:onClick="onCopingButton"  
+            android:text="@string/Coping" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/contact_us" 
+            android:drawableTop="@drawable/photo" 
             android:layout_width="0dip"
             android:layout_weight="1" />
         <Button
-            android:onClick="onGuidebookButton" 
-            android:text="@string/Guidebook" 
+            android:onClick="onActiveButton" 
+            android:text="@string/Active" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/events" 
+            android:drawableTop="@drawable/directory" 
             android:layout_width="0dip"
             android:layout_weight="1" />            
           <Button
-            android:onClick="onFAQButton"  
-            android:text="@string/FAQ" 
+            android:onClick="onTestButton"  
+            android:text="@string/Test" 
             android:layout_height="match_parent"
             android:gravity="center" 
             android:drawableTop="@drawable/contact_us" 
@@ -65,14 +65,14 @@
     <TableRow         
         android:gravity="center">
         <Button
-            android:onClick="onWorkshopsButton"  
-            android:text="@string/Workshops" 
+            android:onClick="onHabitsButton" 
+            android:text="@string/Habits" 
             android:layout_height="match_parent"
             android:gravity="center" 
-            android:drawableTop="@drawable/contact_us" 
+            android:drawableTop="@drawable/resources" 
             android:layout_width="0dip"
-            android:layout_weight="1" />  
-             
+            android:layout_weight="1" /> 
+                       
         <!-- place holder -->
         <Button 
             android:text="@string/Events" 
@@ -82,8 +82,8 @@
             android:enabled="false"
             android:drawableTop="@drawable/events" 
             android:layout_width="0dip"
-            android:layout_weight="1" />  
-            
+            android:layout_weight="1" />            
+       
         <!-- place holder -->
         <Button 
             android:text="@string/Events" 
@@ -93,7 +93,8 @@
             android:enabled="false"
             android:drawableTop="@drawable/events" 
             android:layout_width="0dip"
-            android:layout_weight="1" />  
+            android:layout_weight="1" />            
+        
     </TableRow>
 
 </TableLayout>

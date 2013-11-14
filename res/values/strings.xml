@@ -3,6 +3,7 @@
 
     <string name="app_name">CARE App</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
     <string name="Events">Events</string>
     <string name="Todo_List">Todo List</string>
     <string name="Forms">Forms</string>
@@ -19,5 +20,20 @@
     <string name="title_activity_contact_us">Contact Us</string>
     <string name="title_activity_resources">Resources</string>
     <string name="title_activity_calendar">Calendar</string>
+    <string name="Join_Us">Join Us</string>
+    <string name="Offices">Office Locations</string>
+    <string name="Improvement">Mentee Improvement Plan</string>
+    <string name="Update">Weekly Update</string>
+    <string name="Guidebook">Mentor Guidebook</string>
+    <string name="FAQ">FAQ</string>
+    <string name="Workshops">Workshops</string>
+    <string name="title_activity_workshops">Workshops</string>
+    <string name="Goal">Goal Setting</string>
+    <string name="Time">Time Management</string>
+    <string name="Debt">Understanding Debt</string>
+    <string name="Coping">Coping on Campus</string>
+    <string name="Active">Active Reading</string>
+    <string name="Test">Test Anxiety</string>
+    <string name="Habits">Winning Habits</string>
 
 </resources>

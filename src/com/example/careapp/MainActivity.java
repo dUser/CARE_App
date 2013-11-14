@@ -26,23 +26,13 @@ public class MainActivity extends Activity {
     //button listeners
     public void onEventsButton(View view) {
     	Intent intent = new Intent(this, EventsActivity.class);
-        startActivity(intent);    
-        
+        startActivity(intent);
     }
+    
     public void onTodoButton(View view) {
     	Intent intent = new Intent(this, TodoActivity.class);
         startActivity(intent);    	
     }
-    public void onFormsButton(View view) {
-    	Intent intent = new Intent(this, FormsActivity.class);
-        startActivity(intent);     	
-    }
-    
-    public void onPhotoButton(View view) {
-    	Intent intent = new Intent(this, PhotoActivity.class);
-        startActivity(intent);    	
-    }
-    
     
     public void onDirectoryButton(View view) {
     	Intent intent = new Intent(this, DirectoryActivity.class);
