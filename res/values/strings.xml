@@ -3,7 +3,6 @@
 
     <string name="app_name">CARE App</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="Events">Events</string>
     <string name="Todo_List">Todo List</string>
     <string name="Forms">Forms</string>
