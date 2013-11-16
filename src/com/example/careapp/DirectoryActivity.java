@@ -102,12 +102,8 @@ public class DirectoryActivity extends Activity {
 			     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
 			    	 DirectoryActivity.this.openContextMenu(view);
 			     }
-			});			
-
-
-
+			});	
 		} // end else
-
 
 		// Show the Up button in the action bar.
 		setupActionBar();

@@ -19,12 +19,15 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -42,12 +45,7 @@ public class TodoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo);
-
-
-		String errorMsg = "";
 		boolean creationSuccessful = true;
-
-
 
 		// create blank file if it doesn't exist
 		boolean todoExists = true;
@@ -58,12 +56,7 @@ public class TodoActivity extends Activity {
 		}
 		if (!todoExists) {
 			try {
-				FileOutputStream fos = this.getApplicationContext().openFileOutput("todo.txt", MODE_PRIVATE);
-				DataOutputStream dos = new DataOutputStream(fos);
-				String blankStr = "";
-				Toast.makeText(this, "in todo file doesn't exist.", Toast.LENGTH_LONG).show();
-				dos.write(blankStr.getBytes());
-				dos.close();	
+				writeTo("todo.txt", MODE_PRIVATE, "");	
 			} catch (IOException e) {
 				creationSuccessful = false;
 				Toast.makeText(this, "Couldn't create new todo file: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -75,16 +68,7 @@ public class TodoActivity extends Activity {
 			//read in todo file
 			String todoListStr = "";
 			try {
-				StringBuffer sb = new StringBuffer();
-				FileInputStream fis = this.openFileInput("todo.txt");
-				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-				String todoListInput = null;
-				while ((todoListInput = br.readLine()) != null) {
-					sb.append(todoListInput + "\n");
-				}
-				todoListStr = sb.toString();
-				Toast.makeText(this, "Read in todo file:" + todoListStr, Toast.LENGTH_LONG).show();
-				br.close();				
+				todoListStr = readIn("todo.txt");			
 			} catch (IOException e) {
 				readSuccessful = false;
 				Toast.makeText(this, "Couldn't open todo file:  " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -100,12 +84,9 @@ public class TodoActivity extends Activity {
 				listView.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
-					public void onItemClick(AdapterView<?> arg0, View view, int pos,
-							long id) {
+					public void onItemClick(AdapterView<?> arg0, View view, int pos, long id) {
 						// TODO Auto-generated method stub
-						Toast.makeText(TodoActivity.this, "Item Click "+ pos, Toast.LENGTH_LONG).show();
-
-
+						TodoActivity.this.onEditTodoEntry(view);
 					}
 
 				});
@@ -115,7 +96,136 @@ public class TodoActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-	} //end onCreate 
+	} //end onCreate
+	
+	
+	public void onEditTodoEntry(View view) {
+		//make sure view is todo_row.xml
+		if (view.getId() == R.id.todoRow) {
+			final String previousName, previousDate;
+			LinearLayout todoRowInfo = (LinearLayout) ((LinearLayout)view).getChildAt(1);		
+			
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			alert.setTitle("Edit");
+			
+			//Create layout
+			final LinearLayout layoutTopLevel = new LinearLayout(this);
+			layoutTopLevel.setOrientation(LinearLayout.VERTICAL);
+			final LinearLayout row1           = new LinearLayout(this);
+			final LinearLayout row2           = new LinearLayout(this);
+			
+			row1.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			row1.setOrientation(LinearLayout.HORIZONTAL);
+			
+			row2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			row2.setOrientation(LinearLayout.HORIZONTAL);
+			
+			final TextView namePrompt = new TextView(this);
+			namePrompt.setPadding(10, 0, 0, 0);
+			namePrompt.setText("Name");
+			final EditText nameInput  = new EditText(this);
+			LinearLayout.LayoutParams nameInputParams = 
+					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			nameInputParams.weight = 1;
+			nameInput.setLayoutParams(nameInputParams);
+			TextView nameTextView = (TextView) todoRowInfo.getChildAt(0);
+			previousName = (String) nameTextView.getText();
+			nameInput.setText(previousName);
+			row1.addView(namePrompt);
+			row1.addView(nameInput);
+			
+			final TextView datePrompt = new TextView(this);
+			datePrompt.setPadding(10, 0, 0, 0);
+			datePrompt.setText("Date ");
+			final EditText dateInput  = new EditText(this);
+			LinearLayout.LayoutParams dateInputParams = 
+					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+			dateInputParams.weight = 1;
+			dateInput.setLayoutParams(dateInputParams);
+			TextView dateTextView = (TextView) todoRowInfo.getChildAt(1);
+			previousDate = (String) dateTextView.getText();
+			dateInput.setText(previousDate);
+			row2.addView(datePrompt);
+			row2.addView(dateInput);
+			
+			layoutTopLevel.addView(row1);
+			layoutTopLevel.addView(row2);
+
+			alert.setView(layoutTopLevel);
+
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					String name = nameInput.getText().toString();
+					String date = dateInput.getText().toString();
+					if (name != null && name.length() != 0 && date != null && date.length()	!= 0) {
+						// delete selected entry from todo.txt
+						String todoListStr = "";
+						try {
+							//read in todo.txt
+							todoListStr = readIn("todo.txt");	
+							int k = 0;
+							//parse todo list to data structure
+							TodoParser todoParser = new TodoParser(todoListStr);
+							ArrayList<HashMap<String, String>> todoListMap = todoParser.getTodoList();
+							
+							//delete edited entry from data structure
+							for (int i = 0; i < todoListMap.size(); i++) {
+								if (todoListMap.get(i).get("name").equals(previousName) && 
+										todoListMap.get(i).get("date").equals(previousDate)) {
+									todoListMap.remove(i);
+									break;
+								}
+							}
+							
+							//generate string of new todo items
+							StringBuffer newTodoFile = new StringBuffer();
+							for (int i = 0; i < todoListMap.size(); i++) {
+								String itemEntry = "<item>\n" +
+														"<name>" + todoListMap.get(i).get("name") + "<name>\n" +
+														"<date>" + todoListMap.get(i).get("date") + "<date>\n" +
+													"<item>\n";
+								newTodoFile.append(itemEntry);											
+							}		
+							
+							//create new edited entry
+							String itemEntry = "<item>\n" +
+													"<name>" + name + "<name>\n" +
+													"<date>" + date + "<date>\n" +
+												"<item>\n";
+							newTodoFile.append(itemEntry);
+							boolean writeSuccessful = true;
+							try {
+								//write new list to todo.txt			
+								writeTo("todo.txt", MODE_PRIVATE, newTodoFile.toString());
+
+							} catch (IOException e) {
+								writeSuccessful = false;
+								Toast.makeText(TodoActivity.this, "Error saving changes." + e.getMessage(), Toast.LENGTH_LONG).show();
+							}			
+							//restart activity if successful
+							if (writeSuccessful) {
+								finish();
+								startActivity(getIntent());
+							}
+						} catch (IOException e) {
+							Toast.makeText(TodoActivity.this, "Couldn't open todo file:  " + e.getMessage(), Toast.LENGTH_LONG).show();
+						}
+					} else {
+						Toast.makeText(TodoActivity.this, "Not saving, blank input.", Toast.LENGTH_LONG).show();
+					} //end if-else input strings aren't empty
+				} // end onClick {
+			}); //end alert.setPositiveButton
+
+			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					// Canceled.
+				}
+			});
+
+			alert.show();
+		} 	// end if view is todo_row	
+	} // end onEditTodoEntry
+	
 
 	public void onSubmitChanges(View view) {
 		if (adapter != null) {
@@ -151,14 +261,12 @@ public class TodoActivity extends Activity {
 			try {
 				//assume todo.txt exists because to get to this point onCreate()
 				//must have been called				
-				FileOutputStream fos = TodoActivity.this.getApplicationContext().openFileOutput("todo.txt", MODE_PRIVATE);
-				DataOutputStream dos = new DataOutputStream(fos);
-				dos.write(newTodoFile.toString().getBytes());
-				dos.close();	
+				writeTo("todo.txt", MODE_PRIVATE, newTodoFile.toString());
 			} catch (IOException e) {
 				writeSuccessful = false;
 				Toast.makeText(this, "Error saving changes.", Toast.LENGTH_LONG).show();
-			}			
+			}	
+			
 			//restart activity
 			if (writeSuccessful) {
 				finish();
@@ -168,10 +276,9 @@ public class TodoActivity extends Activity {
 	}
 
 	public void onAdd(View view) {
+		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
 		alert.setTitle("Add");
-		//alert.setMessage("Message");
 		
 		//Create layout
 		final LinearLayout layoutTopLevel = new LinearLayout(this);
@@ -227,12 +334,7 @@ public class TodoActivity extends Activity {
 					try {
 						//assume todo.txt exists because to get to this point onCreate()
 						//must have been called
-						File todoFile = new File("todo.txt");
-						Toast.makeText(TodoActivity.this, "Trying to add, to exists:" + todoFile.exists(), Toast.LENGTH_LONG).show();
-						FileOutputStream fos = TodoActivity.this.getApplicationContext().openFileOutput("todo.txt", MODE_APPEND);
-						DataOutputStream dos = new DataOutputStream(fos);
-						dos.write(itemEntry.getBytes());
-						dos.close();						
+						writeTo("todo.txt", MODE_APPEND, itemEntry);
 						
 					} catch (IOException e) {
 						writeSuccessful = false;
@@ -240,21 +342,6 @@ public class TodoActivity extends Activity {
 					}			
 					//restart activity
 					if (writeSuccessful) {
-						String todoListStr = "empty";
-						try {
-							StringBuffer sb = new StringBuffer();
-							FileInputStream fis = TodoActivity.this.openFileInput("todo.txt");
-							BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-							String todoListInput = null;
-							while ((todoListInput = br.readLine()) != null) {
-								sb.append(todoListInput + "\n");
-							}
-							todoListStr = sb.toString();
-							Toast.makeText(TodoActivity.this, todoListStr, Toast.LENGTH_LONG).show();
-							br.close();				
-						} catch (IOException e) {
-							Toast.makeText(TodoActivity.this, "Error reading." + e.getMessage(), Toast.LENGTH_LONG).show();
-						}
 						finish();
 						startActivity(getIntent());
 					}
@@ -273,6 +360,26 @@ public class TodoActivity extends Activity {
 		alert.show();
 		
 	} //end onAdd
+	
+	String readIn(String internalStorageFileName) throws IOException {
+		String fileString = "";
+		StringBuffer sb = new StringBuffer();
+		FileInputStream fis = this.openFileInput(internalStorageFileName);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			sb.append(line + "\n");
+		}
+		fileString = sb.toString();
+		br.close();	
+		return fileString;
+	}
+	void writeTo(String internalStorageFileName, int writeMode, String content) throws IOException {
+		FileOutputStream fos = this.getApplicationContext().openFileOutput(internalStorageFileName, writeMode);
+		DataOutputStream dos = new DataOutputStream(fos);
+		dos.write(content.getBytes());
+		dos.close();	
+	}
 
 
 
