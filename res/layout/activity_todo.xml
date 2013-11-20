@@ -8,15 +8,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TodoActivity"
     android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    <EditText
+        android:id="@+id/todo_event_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Enter your event here..." />
  
 	<Button
         android:id="@+id/add_todo_button"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add"
         android:onClick="onAdd" />
 	
-	
+	</LinearLayout>
 	
 	<ListView android:id="@+id/todo_listView"
 	    android:layout_height="0dip"
@@ -33,7 +44,7 @@
         android:id="@+id/submit_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit_changes"
+        android:text="Remove completed tasks"
         android:onClick="onSubmitChanges" />
 
 </LinearLayout>

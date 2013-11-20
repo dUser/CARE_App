@@ -1,12 +1,16 @@
 package com.example.careapp;
 
-import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 public class ContactUsActivity extends Activity {
 
@@ -16,6 +20,26 @@ public class ContactUsActivity extends Activity {
 		setContentView(R.layout.activity_contact_us);
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	public void onChangeNow(View view) {
+		LayoutInflater inflater = getLayoutInflater();
+		LinearLayout v = (LinearLayout) findViewById(R.id.linear_layout_parent);
+		v.removeView(findViewById(R.id.hello));
+		v.addView(inflater.inflate(R.layout.todo_row, null));
+		
+
+//		if (v != null) {
+//			Toast.makeText(this, ((TextView)v).getText(), Toast.LENGTH_LONG).show();
+//			if (((TextView)v).getText().equals("world"))  {
+//				Toast.makeText(this, "one", Toast.LENGTH_LONG).show();
+//				((TextView) v).setText("hello");
+//			}
+//			else if (((TextView)v).getText().equals("hello")) {
+//				Toast.makeText(this, "two", Toast.LENGTH_LONG).show();
+//				((TextView) v).setText("world");
+//			}
+//		}
 	}
 
 	/**

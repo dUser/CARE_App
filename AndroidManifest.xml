@@ -100,6 +100,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ResourcesActivity" />
         </activity>
+        <activity
+            android:name="com.example.careapp.TodoDialogActivity"
+            android:label="@string/title_activity_todo_dialog"
+            android:parentActivityName="com.example.careapp.TodoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.TodoActivity" />
+        </activity>
     </application>
 
 </manifest>

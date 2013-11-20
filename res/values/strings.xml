@@ -37,5 +37,6 @@
     <string name="Habits">Winning Habits</string>
     <string name="add">Add</string>
     <string name="submit_changes">Submit Changes</string>
+    <string name="title_activity_todo_dialog">TodoDialogActivity</string>
 
 </resources>

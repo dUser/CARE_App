@@ -7,11 +7,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
  
 public class TodoAdapter extends BaseAdapter {   
 
@@ -19,7 +19,6 @@ public class TodoAdapter extends BaseAdapter {
     private ArrayList<HashMap<String, String>> todoList;
     private static LayoutInflater inflater = null;
     private boolean[] itemChecked;
-   // public ImageLoader imageLoader; 
  
     public TodoAdapter(Activity activity, ArrayList<HashMap<String, String>> todoList) {
         this.activity = activity;
@@ -60,6 +59,7 @@ public class TodoAdapter extends BaseAdapter {
         final int pos = position;
 		View checkbox = view.findViewById(R.id.checkbox_todoRow);
 		checkbox.setTag(position);
+		((CheckBox) checkbox).setChecked(itemChecked[position]);
 		checkbox.setOnClickListener(new OnClickListener() {					
 			@Override
 			public void onClick(View v) {
@@ -71,10 +71,62 @@ public class TodoAdapter extends BaseAdapter {
 			}
 		}); //end setup onClickListener
  
-        TextView name = (TextView) view.findViewById(R.id.text1_todoRow);
-        TextView date = (TextView) view.findViewById(R.id.text2_todoRow); 
- 
-        HashMap<String, String> item = new HashMap<String, String>();
+        final TextView name = (TextView) view.findViewById(R.id.text1_todoRow);
+        final TextView date = (TextView) view.findViewById(R.id.text2_todoRow);
+        
+        name.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (activity != null && activity instanceof TodoActivity) {					
+					
+					CheckBox checkBox = null;
+					ViewGroup listViewRow = (ViewGroup) v.getParent().getParent();
+					int pos = listViewRow.getChildCount();
+					for (int i = 0; i < pos; i++) {
+					    View view = listViewRow.getChildAt(i);
+					    if (view instanceof CheckBox) {
+					    	checkBox = (CheckBox) view;
+					        break;
+					    }
+					}	
+					
+					if (checkBox != null) {
+						int position = (Integer) checkBox.getTag();
+						((TodoActivity)activity).editTodoItemName(v, position);
+					}
+				}
+				
+			}
+		});
+        
+        date.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (activity != null && activity instanceof TodoActivity) {					
+					
+					CheckBox checkBox = null;
+					ViewGroup listViewRow = (ViewGroup) v.getParent().getParent();
+					int pos = listViewRow.getChildCount();
+					for (int i = 0; i < pos; i++) {
+					    View view = listViewRow.getChildAt(i);
+					    if (view instanceof CheckBox) {
+					    	checkBox = (CheckBox) view;
+					        break;
+					    }
+					}	
+					
+					if (checkBox != null) {
+						int position = (Integer) checkBox.getTag();
+						((TodoActivity)activity).editTodoItemDate(v, position);
+					}
+				}
+				
+			}
+		}); 
+       
+	    HashMap<String, String> item = new HashMap<String, String>();
         item = todoList.get(position);
  
         name.setText(item.get("name"));
