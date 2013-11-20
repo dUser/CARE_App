@@ -559,6 +559,12 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		return newTodoFile.toString();
 	}
 	private String twentyFour2TwelveHourTime(int hour, int minute) {
+		String minuteStr = "";
+		if (minute < 10) {
+			minuteStr = "0" + minute;
+		} else {
+			minuteStr = Integer.toString(minute);
+		}
 		String amPm = "";
 		if (hour >= 12 && hour <= 23) {
 			amPm = "pm";
@@ -571,7 +577,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		if (hour == 0) {
 			hour = 12;
 		}
-		return hour + ":" + minute + " " + amPm;
+		return hour + ":" + minuteStr + " " + amPm;
 	}
 
 
