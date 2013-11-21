@@ -34,9 +34,12 @@ public class ResourcesActivity extends Activity {
 	}
 	
 	public void onOfficesButton(View view) {
-		File file = new File("mnt/sdcard/Download/offices.pdf");
-
-        if (file.exists()) {
+		//File file = new File("mnt/sdcard/Download/offices.pdf");
+		
+		File file = new File(getExternalFilesDir(null)+"/offices.pdf");
+		//File file2 = new File(file.getAbsolutePath() + "/offices.pdf")
+        Toast.makeText(ResourcesActivity.this, file.toString(), Toast.LENGTH_LONG).show();
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) && file.exists()) {
             Uri path = Uri.fromFile(file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(path, "application/pdf");
@@ -48,7 +51,7 @@ public class ResourcesActivity extends Activity {
             catch (ActivityNotFoundException e) {
                 Toast.makeText(ResourcesActivity.this, 
                     "No Application Available to View PDF", 
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_LONG).show();
             }
         } else {
 			String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/Office%20Locations%20EYOS.pdf";
@@ -60,8 +63,7 @@ public class ResourcesActivity extends Activity {
 			    request.allowScanningByMediaScanner();
 			    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 			}*/
-			request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "offices.pdf");
-	
+			request.setDestinationInExternalFilesDir(this, null, "office.pdf");
 			// get download service and enqueue file
 			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 			manager.enqueue(request);
