@@ -39,7 +39,8 @@
         <activity
             android:name="com.example.careapp.TodoActivity"
             android:label="@string/title_activity_todo"
-            android:parentActivityName="com.example.careapp.MainActivity" >
+            android:parentActivityName="com.example.careapp.MainActivity"
+            android:windowSoftInputMode="stateUnchanged" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.careapp.MainActivity" />

@@ -126,11 +126,11 @@ public class TodoAdapter extends BaseAdapter {
 			}
 		}); 
        
-	    HashMap<String, String> item = new HashMap<String, String>();
-        item = todoList.get(position);
+	    HashMap<String, String> todoEvent = new HashMap<String, String>();
+	    todoEvent = todoList.get(position);
  
-        name.setText(item.get("name"));
-        date.setText(item.get("date"));
+        name.setText(todoEvent.get("name"));
+        date.setText(todoEvent.get("date"));
 
         return view;
     }

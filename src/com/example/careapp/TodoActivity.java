@@ -158,32 +158,32 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		StringBuffer sb = new StringBuffer();
 		FileInputStream fis = this.openFileInput(internalStorageFileName);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-		String line = null;
+		String line = null; 
 		while ((line = br.readLine()) != null) {
-			sb.append(line + "\n");
+			sb.append(line + "\n");			
 		}
-		fileString = sb.toString();
+		fileString = sb.toString(); 
 		br.close();	
-		return fileString;
+		return fileString;		 
 	}
 	private void writeTo(String internalStorageFileName, int writeMode, String content) throws IOException {
 		FileOutputStream fos = this.getApplicationContext().openFileOutput(internalStorageFileName, writeMode);
 		DataOutputStream dos = new DataOutputStream(fos);
-		dos.write(content.getBytes());
-		dos.close();	
+		dos.write(content.getBytes()); 		
+		dos.close(); 	
 	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
+	private void setupActionBar() { 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
 
-	@Override
+	@Override 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.todo, menu);
@@ -294,7 +294,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 						break;
 					} catch (ParseException e) {
 						if (invalidCounter == dateFormats.size()) {
-							throw new ParseException("Couldn't match date format", i);
+							throw new ParseException("Couldn't match date format: " + e.getMessage(), i);
 						}
 					}
 				}
@@ -314,7 +314,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 				}
 			}
 		} catch (ParseException e) {
-			throw new IOException("Invalid date format");
+			throw new IOException("Invalid date format - " + e.getMessage());
 		}
 		ArrayList<HashMap<String, String>> returnMap = new ArrayList<HashMap<String, String>>();
 		for (int i = 0; i < sortMap.size(); i++) {

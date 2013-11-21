@@ -17,7 +17,7 @@ public class TodoParser {
 			}
 		}
 		for (int i = 0; i < todo.size(); i++) {
-			Pattern p = Pattern.compile("<name>.+<name>");
+			Pattern p = Pattern.compile("<name>[\\s\\S]+<name>");
 			Matcher m = p.matcher(todo.get(i));
 			String name = null;
 			if (m.find()) {
