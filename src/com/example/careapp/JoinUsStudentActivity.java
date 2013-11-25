@@ -1,17 +1,19 @@
 package com.example.careapp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class JoinUsStudentActivity extends Activity {
 
@@ -19,24 +21,18 @@ public class JoinUsStudentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_us_student);
-		
 
-		
-		
-		
+
+
+
+
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
-	
-	
+
+
 	public void onSubmitStudentJoinUsForm(View view) {
-		ArrayList<HashMap<ArrayList<Integer>, ArrayList<Integer>>> validationMap = 
-				new ArrayList<HashMap<ArrayList<Integer>, ArrayList<Integer>>>();
-		
-		ArrayList<Integer> notRequiredTextControls = new ArrayList<Integer>();
-		notRequiredTextControls.add(R.id.whyJoinControl);
-		notRequiredTextControls.add(R.id.addressLine2Control);
-		
+
 		ArrayList<Integer> requiredTextControls = new ArrayList<Integer>();
 		requiredTextControls.add(R.id.firstNameControl);
 		requiredTextControls.add(R.id.lastNameControl);
@@ -48,15 +44,83 @@ public class JoinUsStudentActivity extends Activity {
 		requiredTextControls.add(R.id.emailControl);
 		requiredTextControls.add(R.id.cellControl);
 		requiredTextControls.add(R.id.homeControl);
-		
+
 		for (int i = 0; i < requiredTextControls.size(); i++) {
 			TextView tv = (TextView) findViewById(requiredTextControls.get(i));
-			//if ()
+			if (tv != null) {
+				String content = tv.getText().toString();
+				if (content != null) {
+					content = content.replaceAll("\\s+","");
+					if (content.length() == 0) {
+						Toast.makeText(this, "Please fill in all required fields.", Toast.LENGTH_LONG).show();
+						return;
+					}
+				} else {
+					Toast.makeText(this, "Please fill in all required fields.", Toast.LENGTH_LONG).show();
+					return;
+				}
+			}
 		}
+
+		ArrayList<Integer> requiredSpinnerControls = new ArrayList<Integer>();
+		requiredSpinnerControls.add(R.id.stateControl);
+
+		for (int i = 0; i < requiredSpinnerControls.size(); i++) {
+			Spinner spinner = (Spinner) findViewById(requiredSpinnerControls.get(i));
+			if (spinner != null) {
+				String content = spinner.getSelectedItem().toString();
+				if (content != null) {
+					content = content.replaceAll("\\s+","");
+					if (content.length() == 0) {
+						Toast.makeText(this, "Please fill in all required fields.", Toast.LENGTH_LONG).show();
+						return;
+					}
+				} else {
+					Toast.makeText(this, "Please fill in all required fields.", Toast.LENGTH_LONG).show();
+					return;
+				}
+			}
+		}
+
+		String firstName    = ((TextView) findViewById(R.id.firstNameControl)).getText().toString();
+		String lastName     = ((TextView) findViewById(R.id.lastNameControl)).getText().toString();
+		String zNumber      = ((TextView) findViewById(R.id.zNumberControl)).getText().toString();
+		String major        = ((TextView) findViewById(R.id.majorControl)).getText().toString();
+		String address      = ((TextView) findViewById(R.id.addressControl)).getText().toString();
+		String addressLine2 = ((TextView) findViewById(R.id.addressLine2Control)).getText().toString();
+		String city         = ((TextView) findViewById(R.id.cityControl)).getText().toString();
+		String state        = ((Spinner)  findViewById(R.id.stateControl)).getSelectedItem().toString();
+		String zip          = ((TextView) findViewById(R.id.zipCodeControl)).getText().toString();		
+		String email        = ((TextView) findViewById(R.id.emailControl)).getText().toString();
+		String cellPhone    = ((TextView) findViewById(R.id.cellControl)).getText().toString();
+		String homePhone    = ((TextView) findViewById(R.id.homeControl)).getText().toString();
+		String whyJoin      = ((TextView) findViewById(R.id.whyJoinControl)).getText().toString();	
+		
+		String emailConent = 
+				"First Name:     " + firstName    + "\n" +
+				"Last Name:      " + lastName     + "\n" +		
+				"Z Number:       " + zNumber      + "\n" +
+				"Major:          " + major        + "\n" +		
+				"Address:        " + address      + "\n" +
+				"Address Line 2: " + addressLine2 + "\n" +		
+				"City:           " + city         + "\n" +
+				"State:          " + state        + "\n" +	
+				"Zip:            " + zip          + "\n" +
+				"Email:          " + email        + "\n" +		
+				"Cell Phone:     " + cellPhone    + "\n" +
+				"Home Phone:     " + homePhone    + "\n" +	
+				"Why Join:       " + whyJoin      + "\n";
 		
 		
+		Intent signUp = new Intent(android.content.Intent.ACTION_SEND);		
+		signUp.setType("plain/text");
 		
-		
+		signUp.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "careuser001@gmail.com" });
+		signUp.putExtra(android.content.Intent.EXTRA_SUBJECT, "CARE Program application");
+		signUp.putExtra(android.content.Intent.EXTRA_TEXT, emailConent);
+
+		startActivity(Intent.createChooser(signUp, "Signing up for CARE program"));
+
 	}
 
 	/**
