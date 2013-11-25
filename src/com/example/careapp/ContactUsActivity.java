@@ -78,7 +78,8 @@ public class ContactUsActivity extends Activity {
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
 	    int listId = menuItem.getGroupId();
-	    if (menuItem.getItemId() == 1) { //needs some work
+	    //TODO:needs work to validate 
+	    if (menuItem.getItemId() == 1) { 
 	    	try {
 	    		//need to validate telephone, Uri doesn't throw an exception
 	    		Uri tele = Uri.parse("tel:" + contactUsMap.get(listId).get("phone"));
@@ -98,12 +99,7 @@ public class ContactUsActivity extends Activity {
 	    			throw new Exception("Error: Invalid url.");
 	    		}
 	    		
-	    		//Intent i = new Intent(Intent.ACTION_SEND);
-	    		//i.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "dascenzd@go.stockton.edu" });
-	    		//i.putExtra(android.content.Intent.EXTRA_SUBJECT, "testing");
-	    		//i.putExtra(android.content.Intent.EXTRA_TEXT, "This is a test");
-	    		//startActivity(Intent.createChooser(i, "Send email"));
-	    		
+	    		//TODO:need to be able to send not just plain text emails
 	    		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);  
 	    		emailIntent.setType("plain/text");
 	    		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "" });

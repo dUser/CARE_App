@@ -96,10 +96,10 @@
         <activity
             android:name="com.example.careapp.WorkshopsActivity"
             android:label="@string/title_activity_workshops"
-            android:parentActivityName="ResourcesActivity" >
+            android:parentActivityName="com.example.careapp.ResourcesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ResourcesActivity" />
+                android:value="com.example.careapp.ResourcesActivity" />
         </activity>
         <activity
             android:name="com.example.careapp.TodoDialogActivity"
@@ -112,6 +112,14 @@
         <activity
             android:name="com.example.careapp.FaqActivity"
             android:label="@string/title_activity_faq"
+            android:parentActivityName="com.example.careapp.ResourcesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.ResourcesActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.JoinUsStudentActivity"
+            android:label="@string/title_activity_join_us_student"
             android:parentActivityName="com.example.careapp.ResourcesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

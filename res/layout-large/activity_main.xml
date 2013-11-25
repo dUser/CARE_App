@@ -17,7 +17,7 @@
     	android:layout_weight="2" >
         <Button 
             android:onClick="onEventsButton"
-            android:text="large_activity_main" 
+            android:text="Events" 
             android:layout_height="match_parent"
             android:gravity="center" 
             android:drawableTop="@drawable/events"

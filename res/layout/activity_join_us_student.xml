@@ -1,0 +1,258 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".JoinUsStudentActivity"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:textStyle="bold"
+    	android:textSize="20sp"
+    	android:text="Join Us\n" />
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="The CARE Program is open to all Stockton College students especially freshmen and transfer students who identify themselves as in need of CARE Services.\n" />
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:textStyle="bold"
+    	android:text="Join the CARE Program now by completing the form provided below.\n" />
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:textColor="#FF0000"
+    	android:textSize="12sp"
+    	android:text="* Required Field. Please enter valid information.\n" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText 
+    	    android:id="@+id/firstNameControl"
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="First Name"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText
+    	    android:id="@+id/lastNameControl" 
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Last Name"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText 
+    	    android:id="@+id/zNumberControl" 
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Z Number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText 
+    	    android:id="@+id/majorControl" 
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Major"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText 
+    	    android:id="@+id/addressControl" 
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Address"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " 
+    		android:visibility="invisible"/>
+    	<EditText
+    	    android:id="@+id/addressLine2Control"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Address line 2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText 
+    	    android:id="@+id/cityControl" 
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="City"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<Spinner
+        	android:id="@+id/stateControl"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:entries="@array/stateArray"
+        	android:prompt="@string/statePrompt" />
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text=" * " />
+    	<EditText
+    	    android:id="@+id/zipCodeControl"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="ZIP Code"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText
+    	    android:id="@+id/emailControl"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Email"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText
+    	    android:id="@+id/cellControl"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Cell Phone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* " />
+    	<EditText
+    	    android:id="@+id/homeControl"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Home Phone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+    	<TextView
+        	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textColor="#FF0000"
+    		android:textSize="12sp"
+    		android:text="* "
+    		android:visibility="invisible" />
+    	<EditText
+    	    android:id="@+id/whyJoinControl"  
+    	    android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:lines="3"
+    		android:hint="Why do you want to join the CARE Program?"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" >
+        <Button
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content" 
+            android:text="submit form"
+            android:onClick="onSubmitStudentJoinUsForm" />
+    </LinearLayout>
+    
+    
+    
+    
+    
+    
+    
+
+</LinearLayout>

@@ -9,19 +9,23 @@
     tools:context=".ResourcesActivity"
     android:orientation="vertical" >
     <Button
-        android:onClick="onWorkshopsButton"  
+        android:onClick="onJoinButton"  
         android:text="@string/Join_Us" 
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:gravity="center" 
-        android:drawableTop="@drawable/contact_us" />      
+        android:drawableLeft="@drawable/directory"
+        android:background="@drawable/main_selector"
+        android:layout_margin="2dp"  />      
      <Button
         android:onClick="onWorkshopsButton"  
         android:text="Workshop materials" 
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:gravity="center" 
-        android:drawableTop="@drawable/contact_us" />  
+        android:drawableLeft="@drawable/forms"
+        android:background="@drawable/main_selector"
+        android:layout_margin="2dp"  />  
 
     <ListView
         android:id="@+id/resourcesListView"

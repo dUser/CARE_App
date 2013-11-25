@@ -1,25 +1,19 @@
 package com.example.careapp;
 
-import java.io.File;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.DownloadManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 
 public class ResourcesActivity extends Activity {
 	
@@ -71,7 +65,24 @@ public class ResourcesActivity extends Activity {
 
 	//Button Listeners
 	public void onJoinButton(View view) {
-		
+		String[] options = { "Student", "Faculty" };
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setTitle("Are you?")
+	           .setItems(options, new DialogInterface.OnClickListener() {
+	        	   
+	        	   @Override
+	               public void onClick(DialogInterface dialog, int which) {
+	        		   switch (which) {
+	        		   case 0:  Intent intent = new Intent(ResourcesActivity.this, JoinUsStudentActivity.class);
+	        		   			ResourcesActivity.this.startActivity(intent); 	
+	        			   break;
+	        		   case 1: //faculty
+	        			   break;
+	        		   }
+	               }
+              
+	           });
+	    builder.create().show();
 	}
 	
 	public void onOfficesButton(View view) {

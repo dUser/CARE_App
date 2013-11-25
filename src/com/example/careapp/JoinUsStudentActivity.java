@@ -1,64 +1,62 @@
 package com.example.careapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
-public class FaqActivity extends Activity {
+public class JoinUsStudentActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_faq);
+		setContentView(R.layout.activity_join_us_student);
 		
-		
-		WebView webView = (WebView) findViewById(R.id.faqWebView);		
-		//get text of faq html
-		Resources resources = this.getResources();
-		String faq = null, line = null;
-		InputStream is = null;
-		BufferedReader bufferedReader = null;
-		boolean readSuccessful = true;
-		try {
-			is = resources.openRawResource(R.raw.faq);
-			bufferedReader = new BufferedReader(new InputStreamReader(is));
-			StringBuilder faqBuilder = new StringBuilder();
 
-			while ((line = bufferedReader.readLine()) != null) {
-				faqBuilder.append(line + "\n");
-			}
-			faq = faqBuilder.toString();
-			
-			bufferedReader.close();
-
-		} catch (IOException e) {
-			readSuccessful = false;
-			Toast.makeText(this, "Unable to read FAQ file.", Toast.LENGTH_LONG).show();
-		}
-		
-		//Add html to webview if read was successful
-		if (readSuccessful && faq != null && faq.length() != 0) {
-			webView.loadData(faq, "text/html", "UTF-8");
-		}
 		
 		
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	
+	public void onSubmitStudentJoinUsForm(View view) {
+		ArrayList<HashMap<ArrayList<Integer>, ArrayList<Integer>>> validationMap = 
+				new ArrayList<HashMap<ArrayList<Integer>, ArrayList<Integer>>>();
+		
+		ArrayList<Integer> notRequiredTextControls = new ArrayList<Integer>();
+		notRequiredTextControls.add(R.id.whyJoinControl);
+		notRequiredTextControls.add(R.id.addressLine2Control);
+		
+		ArrayList<Integer> requiredTextControls = new ArrayList<Integer>();
+		requiredTextControls.add(R.id.firstNameControl);
+		requiredTextControls.add(R.id.lastNameControl);
+		requiredTextControls.add(R.id.zNumberControl);
+		requiredTextControls.add(R.id.majorControl);
+		requiredTextControls.add(R.id.addressControl);
+		requiredTextControls.add(R.id.cityControl);
+		requiredTextControls.add(R.id.zipCodeControl);
+		requiredTextControls.add(R.id.emailControl);
+		requiredTextControls.add(R.id.cellControl);
+		requiredTextControls.add(R.id.homeControl);
+		
+		for (int i = 0; i < requiredTextControls.size(); i++) {
+			TextView tv = (TextView) findViewById(requiredTextControls.get(i));
+			//if ()
+		}
+		
+		
+		
+		
 	}
 
 	/**
@@ -74,7 +72,7 @@ public class FaqActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.faq, menu);
+		getMenuInflater().inflate(R.menu.join_us_student, menu);
 		return true;
 	}
 
