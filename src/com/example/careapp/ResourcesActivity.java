@@ -73,10 +73,11 @@ public class ResourcesActivity extends Activity {
 	        	   @Override
 	               public void onClick(DialogInterface dialog, int which) {
 	        		   switch (which) {
-	        		   case 0:  Intent intent = new Intent(ResourcesActivity.this, JoinUsStudentActivity.class);
-	        		   			ResourcesActivity.this.startActivity(intent); 	
+	        		   case 0:  Intent student_intent = new Intent(ResourcesActivity.this, JoinUsStudentActivity.class);
+	        		   			ResourcesActivity.this.startActivity(student_intent); 	
 	        			   break;
-	        		   case 1: //faculty
+	        		   case 1: Intent faculty_intent = new Intent(ResourcesActivity.this, JoinUsFacultyActivity.class);
+   		   					   ResourcesActivity.this.startActivity(faculty_intent); 	
 	        			   break;
 	        		   }
 	               }
@@ -100,7 +101,8 @@ public class ResourcesActivity extends Activity {
 	}
 	
 	public void onUpdateButton(View view) {
-		
+		Intent weekly_update_intent = new Intent(ResourcesActivity.this, WeeklyUpdateActivity.class);
+		ResourcesActivity.this.startActivity(weekly_update_intent); 
 	}
 	
 	public void onGuidebookButton(View view) {

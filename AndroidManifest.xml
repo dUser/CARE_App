@@ -125,6 +125,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.careapp.ResourcesActivity" />
         </activity>
+        <activity
+            android:name="com.example.careapp.JoinUsFacultyActivity"
+            android:label="@string/title_activity_join_us_faculty"
+            android:parentActivityName="com.example.careapp.ResourcesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.ResourcesActivity" />
+        </activity>
+        <activity
+            android:name="com.example.careapp.WeeklyUpdateActivity"
+            android:label="@string/title_activity_weekly_update"
+            android:parentActivityName="com.example.careapp.ResourcesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.ResourcesActivity" />
+        </activity>
     </application>
 
 </manifest>

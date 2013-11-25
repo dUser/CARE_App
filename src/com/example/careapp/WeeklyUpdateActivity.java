@@ -1,35 +1,24 @@
 package com.example.careapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.Toast;
 
-public class FaqActivity extends Activity {
+public class WeeklyUpdateActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_faq);
+		setContentView(R.layout.activity_weekly_update);
 		
-		
-		WebView webView = (WebView) findViewById(R.id.faqWebView);	
-		
-		//get text of faq html		
-		webView.loadUrl("file:///android_asset/faq.html");
+		WebView webView = (WebView) findViewById(R.id.weeklyUpdateWebView);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.loadUrl("https://docs.google.com/forms/d/1pNCgKYC_ahO8n_wlX1hstfqm6EkU3UzQO9ssdy4Dsa0/viewform");
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -48,7 +37,7 @@ public class FaqActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.faq, menu);
+		getMenuInflater().inflate(R.menu.weekly_update, menu);
 		return true;
 	}
 
