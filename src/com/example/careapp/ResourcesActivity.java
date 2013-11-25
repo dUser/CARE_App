@@ -10,6 +10,9 @@ import android.app.DownloadManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -19,90 +22,70 @@ import android.content.Intent;
 import android.os.Build;
 
 public class ResourcesActivity extends Activity {
+	
+	 ListView resourceListView;
+	 
+	 String[] resourcesTitles = {"Office Locations & Phone Numbers", "Mentee Improvement Plan", "Mentee Weekly Update",
+			 					 "Personal Mentor (Faculty & Staff) Guidebook", "FAQ's"};
+	 PdfDownloader pdfDownloader;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_resources);
+		
+		resourceListView = (ListView)findViewById(R.id.resourcesListView);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resourcesTitles);		 
+		resourceListView.setAdapter(arrayAdapter);
+		
+		this.registerForContextMenu(resourceListView);
+		resourceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+		    	 ResourcesActivity.this.onlistItem(position, view);
+		     }
+		});	
+		
+		pdfDownloader = new PdfDownloader(this);
+		
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 	
+	//I think View parameter is useless here
+	private void onlistItem(int position, View view) {
+		switch (position) {
+		case 0: onOfficesButton(view);
+			break;
+		case 1: onImprovementButton(view);
+			break;			
+		case 2: onUpdateButton(view);
+			break;
+		case 3: onGuidebookButton(view);
+			break;
+		case 4: onFAQButton(view);
+			break;						
+		}
+	}
+
 	//Button Listeners
 	public void onJoinButton(View view) {
 		
 	}
 	
 	public void onOfficesButton(View view) {
-		//File file = new File("mnt/sdcard/Download/offices.pdf");
-		
-		File file = new File(getExternalFilesDir(null)+"/offices.pdf");
-		//File file2 = new File(file.getAbsolutePath() + "/offices.pdf")
-        Toast.makeText(ResourcesActivity.this, file.toString(), Toast.LENGTH_LONG).show();
-		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) && file.exists()) {
-            Uri path = Uri.fromFile(file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(path, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            try {
-                startActivity(intent);
-            } 
-            catch (ActivityNotFoundException e) {
-                Toast.makeText(ResourcesActivity.this, 
-                    "No Application Available to View PDF", 
-                    Toast.LENGTH_LONG).show();
-            }
-        } else {
-			String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/Office%20Locations%20EYOS.pdf";
-			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-			request.setDescription("Download Stockton PDF");
-			request.setTitle("Offices");
-			// in order for this if to run, you must use the android 3.2 to compile your app
-			/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			    request.allowScanningByMediaScanner();
-			    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			}*/
-			request.setDestinationInExternalFilesDir(this, null, "office.pdf");
-			// get download service and enqueue file
-			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-			manager.enqueue(request);
-        }
+		String fileName = "offices";
+		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/Office%20Locations%20EYOS.pdf";
+		String title = "Offices";
+		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
 	public void onImprovementButton(View view) {
-		File file = new File("mnt/sdcard/Download/improvement.pdf");
-
-        if (file.exists()) {
-            Uri path = Uri.fromFile(file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(path, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            try {
-                startActivity(intent);
-            } 
-            catch (ActivityNotFoundException e) {
-                Toast.makeText(ResourcesActivity.this, 
-                    "No Application Available to View PDF", 
-                    Toast.LENGTH_SHORT).show();
-            }
-        } else {
-			String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/MIP%20in%20Writeable%20%283%29.pdf";
-			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-			request.setDescription("Download Stockton PDF");
-			request.setTitle("Improvement Plan");
-			// in order for this if to run, you must use the android 3.2 to compile your app
-			/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			    request.allowScanningByMediaScanner();
-			    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			}*/
-			request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "improvement.pdf");
-	
-			// get download service and enqueue file
-			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-			manager.enqueue(request);
-        }
+		String fileName = "improvement";
+		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/MIP%20in%20Writeable%20%283%29.pdf";
+		String title = "Improvement Plan";
+		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
 	public void onUpdateButton(View view) {
@@ -110,42 +93,15 @@ public class ResourcesActivity extends Activity {
 	}
 	
 	public void onGuidebookButton(View view) {
-		File file = new File("mnt/sdcard/Download/guidebook.pdf");
-
-        if (file.exists()) {
-            Uri path = Uri.fromFile(file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(path, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            try {
-                startActivity(intent);
-            } 
-            catch (ActivityNotFoundException e) {
-                Toast.makeText(ResourcesActivity.this, 
-                    "No Application Available to View PDF", 
-                    Toast.LENGTH_SHORT).show();
-            }
-        } else {
-			String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE%20Mentor%20Guide%20Book.pdf";
-			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-			request.setDescription("Download Stockton PDF");
-			request.setTitle("Guidebook");
-			// in order for this if to run, you must use the android 3.2 to compile your app
-			/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			    request.allowScanningByMediaScanner();
-			    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			}*/
-			request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "guidebook.pdf");
-	
-			// get download service and enqueue file
-			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-			manager.enqueue(request);
-        }
+		String fileName = "guidebook";
+		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE%20Mentor%20Guide%20Book.pdf";
+		String title = "Guidebook";
+		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
 	public void onFAQButton(View view) {
-		
+	    Intent intent = new Intent(this, FaqActivity.class);
+	    startActivity(intent);
 	}
 	
 	public void onWorkshopsButton(View view) {

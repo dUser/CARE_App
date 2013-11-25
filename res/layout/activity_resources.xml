@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -7,93 +7,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ResourcesActivity"
-    android:stretchColumns="*" >
-    <TableRow         
-        android:gravity="center">
-        <Button 
-            android:onClick="onJoinButton"
-            android:text="@string/Join_Us" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/forms"
-            android:layout_width="0dip"
-            android:layout_weight="1" />
-        <Button 
-            android:onClick="onOfficesButton"
-            android:text="@string/Offices" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/directory"
-            android:layout_width="0dip"
-            android:layout_weight="1" />
-         <Button
-            android:onClick="onImprovementButton" 
-            android:text="@string/Improvement" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/todo" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />            
-    </TableRow>
-    <TableRow         
-        android:gravity="center">
-        <Button
-            android:onClick="onUpdateButton"  
-            android:text="@string/Update" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/contact_us" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />
-        <Button
-            android:onClick="onGuidebookButton" 
-            android:text="@string/Guidebook" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/events" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />            
-          <Button
-            android:onClick="onFAQButton"  
-            android:text="@string/FAQ" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/contact_us" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />            
-    </TableRow>
-    <TableRow         
-        android:gravity="center">
-        <Button
-            android:onClick="onWorkshopsButton"  
-            android:text="@string/Workshops" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
-            android:drawableTop="@drawable/contact_us" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />  
-             
-        <!-- place holder -->
-        <Button 
-            android:text="@string/Events" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
- 			android:visibility="invisible"
-            android:enabled="false"
-            android:drawableTop="@drawable/events" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />  
-            
-        <!-- place holder -->
-        <Button 
-            android:text="@string/Events" 
-            android:layout_height="match_parent"
-            android:gravity="center" 
- 			android:visibility="invisible"
-            android:enabled="false"
-            android:drawableTop="@drawable/events" 
-            android:layout_width="0dip"
-            android:layout_weight="1" />  
-    </TableRow>
+    android:orientation="vertical" >
+    <Button
+        android:onClick="onWorkshopsButton"  
+        android:text="@string/Join_Us" 
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center" 
+        android:drawableTop="@drawable/contact_us" />      
+     <Button
+        android:onClick="onWorkshopsButton"  
+        android:text="Workshop materials" 
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center" 
+        android:drawableTop="@drawable/contact_us" />  
 
-</TableLayout>
+    <ListView
+        android:id="@+id/resourcesListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
+
+
+
+</LinearLayout>

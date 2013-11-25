@@ -38,5 +38,6 @@
     <string name="add">Add</string>
     <string name="submit_changes">Submit Changes</string>
     <string name="title_activity_todo_dialog">TodoDialogActivity</string>
+    <string name="title_activity_faq">FaqActivity</string>
 
 </resources>

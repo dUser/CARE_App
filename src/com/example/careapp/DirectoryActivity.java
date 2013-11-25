@@ -79,7 +79,6 @@ public class DirectoryActivity extends Activity {
 					bufferedReader.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -125,8 +124,9 @@ public class DirectoryActivity extends Activity {
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
+		//TODO:need to add validity checking
 	    int listId = menuItem.getGroupId();
-	    if (menuItem.getItemId() == 1) { //needs some work
+	    if (menuItem.getItemId() == 1) {
 	    	try {
 	    		Uri url = Uri.parse(directoryMap.get(listId).get("link"));
 	    		if (url == null || (url == Uri.EMPTY)) {
