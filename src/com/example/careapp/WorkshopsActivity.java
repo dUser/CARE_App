@@ -1,33 +1,79 @@
 package com.example.careapp;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DownloadManager;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
+import android.os.StrictMode;
+import android.support.v4.app.NavUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class WorkshopsActivity extends Activity {
+	
+	 ListView workshopListView;
+	 
+	 String[] workshopTitles = {"Goal Setting", "Time Management", "Understanding Consumer and Student Debt",
+			 					"Coping With Life On Campus", "Active Reading and Listening", "How to Manage Test Anxiety",
+			 					"Developing Winning Habits"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_workshops);
+		
+		workshopListView = (ListView)findViewById(R.id.workshopsListView);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, workshopTitles);		 
+		workshopListView.setAdapter(arrayAdapter);
+		
+		this.registerForContextMenu(workshopListView);
+		workshopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+		    	 WorkshopsActivity.this.onlistItem(position, view);
+		     }
+		});	
+
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 	
+	//I think View parameter is useless here
+	public void onlistItem(int position, View view) {
+		switch (position) {
+		case 0: onGoalButton(view);
+			break;
+		case 1: onTimeButton(view);
+			break;			
+		case 2: onDebtButton(view);
+			break;
+		case 3: onCopingButton(view);
+			break;
+		case 4: onActiveButton(view);
+			break;			
+		case 5: onTestButton(view);
+			break;			
+		case 6: onHabitsButton(view);
+			break;				
+		}
+	}
 	//Button Listeners
 	public void onGoalButton(View view) {
 		String fileName = "goal";
@@ -78,39 +124,137 @@ public class WorkshopsActivity extends Activity {
 		viewPDF(fileName, url, title);
 	}
 	
-	public void viewPDF(String fileName, String url, String title){
-		File file = new File("mnt/sdcard/Download/" + fileName + ".pdf");
-
+	public void viewPDF(String fileName, String url, String title) {
 		
-        if (file.exists()) {
-            Uri path = Uri.fromFile(file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(path, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//Check if external storage is available (code from google)
+		boolean mExternalStorageAvailable = false;
+		boolean mExternalStorageWriteable = false;
+		String state = Environment.getExternalStorageState();
 
-            try {
-                startActivity(intent);
-            } 
-            catch (ActivityNotFoundException e) {
-                Toast.makeText(WorkshopsActivity.this, 
-                    "No Application Available to View PDF", 
-                    Toast.LENGTH_SHORT).show();
-            }
-        } else {
-			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-			request.setDescription("Download Stockton PDF");
-			request.setTitle(title);
-			// in order for this if to run, you must use the android 3.2 to compile your app
-			/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			    request.allowScanningByMediaScanner();
-			    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			}*/
-			request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName + ".pdf");
-	
-			// get download service and enqueue file
-			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-			manager.enqueue(request);
-        }
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+		    mExternalStorageAvailable = mExternalStorageWriteable = true;
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    // We can only read the media
+		    mExternalStorageAvailable = true;
+		    mExternalStorageWriteable = false;
+		} else {
+		    // Something else is wrong. It may be one of many other states, but all we need
+		    //  to know is we can neither read nor write
+		    mExternalStorageAvailable = mExternalStorageWriteable = false;
+		}
+		
+		if (mExternalStorageAvailable || mExternalStorageWriteable) {
+			//check if file exists
+			File file = new File(getExternalFilesDir(null), fileName + ".pdf");
+			
+	        if (file.exists()) {
+	        	Toast.makeText(WorkshopsActivity.this, file.getPath(), Toast.LENGTH_LONG).show();
+	        	
+	            Uri path = Uri.fromFile(file);
+	            Intent intent = new Intent(Intent.ACTION_VIEW);
+	            intent.setDataAndType(path, "application/pdf");
+	            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+	            try {
+	                startActivity(intent);
+	            } 
+	            catch (ActivityNotFoundException e) {
+	                Toast.makeText(WorkshopsActivity.this, "No Application Available to View PDF", Toast.LENGTH_LONG).show();
+	            }
+	            
+	        //file doesn't exist    
+	        } else {
+	        	//Download if external storage is available and writable
+	        	if (mExternalStorageAvailable) {
+	        		
+	        		//check if there's enough space for the file
+	        		
+	        		//get available space on sd card
+	        	    StatFs fileSysemStats = new StatFs(getExternalFilesDir(null).getPath());
+	        	    long availableBytes = 0;
+	        	    int pdfSize = 0;
+	        	    
+	        	    //call method depending on api level
+	        	    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+	        	    	availableBytes = calculateSize_JELLY_BEAN_MR2(fileSysemStats);
+	        	    } else {
+	        	    	availableBytes = calculateSize(fileSysemStats);
+	        	    }
+	        	    try {
+	        	    	//get size of file to be downloaded
+	        	    	
+	        	    	//allow networking on main thread
+	        	    	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	        	    	StrictMode.setThreadPolicy(policy);
+	        	    	//todo: start thread requesting info, if it takes to long end it and just try to download
+	        	    	
+	        	    	URL downloadFileUrl = new URL(url);
+	        	    	URLConnection connection = downloadFileUrl.openConnection();
+	        	    	connection.connect();
+	        	    	pdfSize = connection.getContentLength();
+	        	    	if (pdfSize == -1) {
+	        	    		throw new IOException("Content length of pdf not set.");
+	        	    	}
+	        	    //Could't determine size of the file to download
+	        	    } catch (IOException e) {
+	        	    	//Oh well, try to download anyway, there is more than likely enough space
+	        	    }
+	        	    
+	        	    if (availableBytes >= pdfSize) {
+		        		Toast.makeText(WorkshopsActivity.this, Long.toString(availableBytes), Toast.LENGTH_LONG).show();	        	    	
+
+	        	    	//Download the pdf
+	        			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+	        			request.setDescription("Download Stockton PDF");
+	        			request.setDestinationInExternalFilesDir(this, null, fileName + ".pdf");
+	        			DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+	        			manager.enqueue(request);
+	        			
+	        			//Problem checking if file is downloaded for download manager downloads it
+	        			try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							Toast.makeText(WorkshopsActivity.this, "couldn't sleep", Toast.LENGTH_LONG).show();
+						}
+	        			//show downloaded file
+	        			File downloadFile = new File(getExternalFilesDir(null), fileName + ".pdf");
+	        			Toast.makeText(WorkshopsActivity.this, downloadFile.getPath(), Toast.LENGTH_LONG).show();
+	        			
+	        	        if (downloadFile.exists()) {
+	        	            Uri path = Uri.fromFile(downloadFile);
+	        	            Intent intent = new Intent(Intent.ACTION_VIEW);
+	        	            intent.setDataAndType(path, "application/pdf");
+	        	            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+	        	            try {
+	        	                startActivity(intent);
+	        	            } 
+	        	            catch (ActivityNotFoundException e) {
+	        	                Toast.makeText(WorkshopsActivity.this, "No Application Available to View PDF", Toast.LENGTH_LONG).show();
+	        	            }
+	        	            
+	        	        //file doesn't exist    
+	        	        } else {
+	        	        	Toast.makeText(WorkshopsActivity.this, "Download failed.", Toast.LENGTH_LONG).show();
+	        	        }
+	        	    	
+	        	    //there's not enough space for the download	
+	        	    } else {
+		        		Toast.makeText(WorkshopsActivity.this, "Not enough storage memory available. Can't download pdf.", Toast.LENGTH_LONG).show();	        	    	
+	        	    }
+	        		
+	        	//external storage not writable, can't download
+	        	} else {
+	        		Toast.makeText(WorkshopsActivity.this, "External storage is not writable. Can't download pdf.", Toast.LENGTH_LONG).show();
+	        	}
+			
+	        }
+	    // can't read or write external storage	
+		} else { 
+			Toast.makeText(WorkshopsActivity.this, "External storage is not available. Can't access or download pdf.", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 
@@ -146,6 +290,17 @@ public class WorkshopsActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@TargetApi(18)
+	private long calculateSize(StatFs fileSysemStats) {
+		return fileSysemStats.getBlockSizeLong() * fileSysemStats.getAvailableBlocksLong();
+	}
+	@SuppressWarnings("deprecation")
+	@TargetApi(10)
+	private long calculateSize_JELLY_BEAN_MR2(StatFs fileSysemStats) {
+		
+		return (long) fileSysemStats.getBlockSize() * (long) fileSysemStats.getBlockCount();
 	}
 
 }
