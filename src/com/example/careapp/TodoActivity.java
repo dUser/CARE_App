@@ -329,7 +329,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 
 	@Override
 	public void onDialogNegativeClick(DialogFragment dialog) {
-		// TODO Auto-generated method stub
+		//user exits without adding
 		
 	}
 	

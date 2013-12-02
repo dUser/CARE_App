@@ -1,22 +1,22 @@
 package com.example.careapp;
 
-import android.net.Uri;
-import android.os.Bundle;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.content.ContentUris;
-import android.content.Intent;
-import android.os.Build;
-import android.provider.CalendarContract;
-import com.google.api.client.http.HttpTransport;  //Needed for query commented out block
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson.JacksonFactory;
-import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.model.*;
+
+//import com.google.api.services.calendar.Calendar;
+//Needed for query commented out block
 
 public class CalendarActivity extends Activity {
 
@@ -27,13 +27,23 @@ public class CalendarActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 		
-		long startMillis = 0;
+		Calendar cal = new GregorianCalendar(); 
+		cal.setTime(new Date()); 
+		long time = cal.getTime().getTime(); 
+		Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon(); 
+		builder.appendPath("time"); 
+		builder.appendPath(Long.toString(time)); 
+		Intent intent = new Intent(Intent.ACTION_VIEW, builder.build()); 
+		startActivity(intent);
+
+		
+/*		long startMillis = 0;
 		
 		Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
 		builder.appendPath("time");
 		ContentUris.appendId(builder, startMillis);
 		Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
-		startActivity(intent);
+		startActivity(intent);*/
 		
 		//Query for the CARE's Calendar. Need the actual info and sign it or it crashes the app. Empty calendar now for show.
 		/*private static final String DEBUG_TAG = "CalendarActivity";
@@ -88,6 +98,15 @@ public class CalendarActivity extends Activity {
 		    }
 		 }*/
 	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		if (hasFocus) {
+			onBackPressed();
+		}
+	}
+	
+	
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
