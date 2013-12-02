@@ -21,6 +21,7 @@ import com.google.api.services.calendar.model.*;
 public class CalendarActivity extends Activity {
 
 
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -7,10 +7,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EventsActivity" >
-
+	
+<!--     <WebView -->
+<!--     	android:id="@+id/eventsWebView" -->
+<!--     	android:layout_width="fill_parent" -->
+<!--     	android:layout_height="fill_parent" /> -->
+    
+    
     <TextView
+        android:id="@+id/eventTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="activity_events.xml" />
+        android:layout_height="wrap_content" />
+    
+ 	<ListView android:id="@+id/eventListView"
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"/>
 
 </RelativeLayout>
