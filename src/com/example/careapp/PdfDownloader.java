@@ -46,6 +46,7 @@ public class PdfDownloader {
 		    //  to know is we can neither read nor write
 		    mExternalStorageAvailable = mExternalStorageWriteable = false;
 		}
+		//end google code
 		
 		if (mExternalStorageAvailable || mExternalStorageWriteable) {
 			//check if file exists

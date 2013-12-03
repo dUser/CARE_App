@@ -17,6 +17,7 @@ public class TodoParser {
 			}
 		}
 		for (int i = 0; i < todo.size(); i++) {
+			
 			Pattern p = Pattern.compile("<name>[\\s\\S]+<name>");
 			Matcher m = p.matcher(todo.get(i));
 			String name = null;
@@ -26,6 +27,7 @@ public class TodoParser {
 			} else {
 				continue;
 			}
+			
 			p = Pattern.compile("<date>.+<date>");
 			m = p.matcher(todo.get(i));
 			String link = null;
@@ -36,9 +38,20 @@ public class TodoParser {
 				continue;
 			}
 
+			p = Pattern.compile("<id>.+<id>");
+			m = p.matcher(todo.get(i));
+			String id = null;
+			if (m.find()) {
+				id = m.group();
+				id = id.replaceAll("<id>", "");
+			} else {
+				continue;
+			}
+
 			HashMap<String, String> todoMap = new HashMap<String, String>();
 			todoMap.put("name", name);
 			todoMap.put("date", link);
+			todoMap.put("id", id);
 			todoList.add(todoMap);
 		}
 	}

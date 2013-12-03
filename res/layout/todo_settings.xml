@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RadioGroup
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical">
+    	<RadioButton android:id="@+id/radio_dont_synch_to_cal"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Don't synch calendar"
+        	android:onClick="onSynchRadioButtonClicked"/>
+    	<RadioButton android:id="@+id/radio_synch_to_cal"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Synch to calendar"
+        	android:onClick="onSynchRadioButtonClicked"/>
+	</RadioGroup>
+	<LinearLayout
+	    android:id="@+id/synch_calendar_group"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:visibility="gone" >
+    	<RadioGroup
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="vertical">
+    		<RadioButton android:id="@+id/radio_choose_cal_every"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="Choose calendar every time"
+        		android:onClick="onCalRadioButtonClicked"/>
+    		<RadioButton android:id="@+id/radio_set_synch_cal"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="Set calendar to synch"
+        		android:onClick="onCalRadioButtonClicked"/>
+		</RadioGroup>
+		<EditText android:id="@+id/synched_todo_calendar"
+		    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:hint="Calendar name to synch"
+    		android:visibility="gone" />
+    
+	    
+	    
+	</LinearLayout>
+
+</LinearLayout>
