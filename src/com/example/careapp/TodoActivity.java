@@ -250,7 +250,6 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			}
 
 		}
-
 	}
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public boolean verifiyEventModificationRow(long eventID, String title, String date) {
