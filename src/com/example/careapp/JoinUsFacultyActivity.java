@@ -18,7 +18,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-
+/**
+ * 
+ * Loads local html of the webpage for faculty joining, has button for launching form
+ *
+ */
 public class JoinUsFacultyActivity extends Activity {
 
 	@Override
@@ -39,7 +43,10 @@ public class JoinUsFacultyActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
-	
+	/**
+	 * Launches webview with google form into webview
+	 * @param view
+	 */
 	public void onFacultyJoin(View view) {
     	Intent intent = new Intent(this, JoinUsFacultyFormActivity.class);
         startActivity(intent);

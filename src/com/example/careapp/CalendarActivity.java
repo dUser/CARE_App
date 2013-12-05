@@ -14,19 +14,27 @@ import android.provider.CalendarContract;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-//import com.google.api.services.calendar.Calendar;
-//Needed for query commented out block
+
 
 public class CalendarActivity extends Activity {
 
-
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-		
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			startCalendar();
+		} else {
+			Toast.makeText(this, "To use this feature you need a minimum Android version of 14, " +
+					"you are currently running version " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	@TargetApi(14)
+	public void startCalendar() {
 		Calendar cal = new GregorianCalendar(); 
 		cal.setTime(new Date()); 
 		long time = cal.getTime().getTime(); 
@@ -36,8 +44,6 @@ public class CalendarActivity extends Activity {
 		Intent intent = new Intent(Intent.ACTION_VIEW, builder.build()); 
 		startActivity(intent);
 	}
-	
-	
 	
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {

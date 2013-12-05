@@ -10,7 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-
+/**
+ * 
+ * Webview to display local html google form.
+ *
+ */
 public class JoinUsFacultyFormActivity extends Activity {
 
 	@Override

@@ -4,7 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * 
+ * For taking a string representing the contents of the local directory file and parsing it into a 
+ * data structure. The form of the data in the directory file is as follows:
+ * <listing>
+ * 	<name>contactname<name>
+ * 	<link>contactlink<link>
+ * <listing>, etc
+ *
+ */
 public class DirectoryParser {
 	
 	ArrayList<HashMap<String, String>> directory = new ArrayList<HashMap<String, String>>();
@@ -52,6 +61,10 @@ public class DirectoryParser {
 			directory.add(listingMap);
 		}
 	}
+	/**
+	 * 
+	 * @return Parsed data structure
+	 */
 	public ArrayList<HashMap<String, String>> getDirectory() {
 		return directory;
 	}

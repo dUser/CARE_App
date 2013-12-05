@@ -20,12 +20,22 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * 
+ * Display a modified version of the "Contact Us" page on the Stockton CARE
+ * program website, and allow users to click on contacts and bring up 
+ * links for emailing or calling them automatically.
+ *
+ */
 public class ContactUsActivity extends Activity {
 	
 	ContactUsAdapter adapter;
 	ArrayList<HashMap<String, String>> contactUsMap;
 	
+	/**
+	 * Populates list view with contacts and set the listener on each.
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,7 +69,7 @@ public class ContactUsActivity extends Activity {
 	
 	
 	/**
-	 * Method is called when an item in the contact us person list is clicked.
+	 * Method is called when an item in the "Contact Us" person list is clicked.
 	 * It generates a context menu with two options: Call or email.
 	 */
 	@Override
@@ -75,6 +85,9 @@ public class ContactUsActivity extends Activity {
 
 	}
 	
+	/**
+	 * When a context menu item is selected, either call or email.
+	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
 	    int listId = menuItem.getGroupId();
@@ -113,7 +126,7 @@ public class ContactUsActivity extends Activity {
 	}
 	
 	/**
-	 * Only 3 people in list, so it's easier just to manually create each
+	 * Only 3 people in list, so it's easier just to manually create each entry
 	 * @return
 	 */
 	private ArrayList<HashMap<String, String>> populateList() {

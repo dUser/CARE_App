@@ -16,6 +16,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * 
+ * Top level navigation for the CARE program resources 
+ * Links to simple, single document resources are in the list view portion the resources display, and
+ * links to more resources are buttons surrounded by a blue outline 
+ *
+ */
 public class ResourcesActivity extends Activity {
 	
 	 ListView resourceListView;
@@ -72,6 +79,11 @@ public class ResourcesActivity extends Activity {
 	}
 
 	//Button Listeners
+	/**
+	 * 
+	 * When the join button is pressed a context dialog menu is presented for either 
+	 * joining as a student or faculty
+	 */
 	public void onJoinButton(View view) {
 		String[] options = { "Student", "Faculty" };
 	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -101,7 +113,10 @@ public class ResourcesActivity extends Activity {
 		});
 	    builder.create().show();
 	}
-	
+	/**
+	 * 
+	 * @param view
+	 */
 	public void onOfficesButton(View view) {
 		String fileName = "offices";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/Office%20Locations%20EYOS.pdf";

@@ -10,7 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-
+/**
+ * 
+ * Display the two versions of the faqs for mentors and students. Uses two buttons to
+ * switch between webviews containing local html copies of the faq documents. 
+ *
+ */
 public class FaqActivity extends Activity {
 	boolean mentorsView;
 	final int SELECTED   = 0xFF0099CC;
@@ -34,6 +39,10 @@ public class FaqActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
+	/**
+	 * Switch to mentors faq, changes button colors to indicate selection.
+	 * @param view
+	 */
 	public void onMentorsFaqButton(View view) {
 		if (!mentorsView) {
 			
@@ -49,6 +58,10 @@ public class FaqActivity extends Activity {
 			webView.loadUrl("file:///android_asset/faq_mentors.html");
 		}
 	}
+	/**
+	 * Switch to students faq button, changes button colors.
+	 * @param view
+	 */
 	public void onStudentsFaqButton(View view) {
 		if (mentorsView) {
 			

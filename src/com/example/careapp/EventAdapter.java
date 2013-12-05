@@ -12,7 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+/**
+ * 
+ * Adapter for displaying events from the CARE calendar
+ * The events are displayed in a list view, events occurring on the same day
+ * will be under a common header (date - mm/dd/yyyy) in the listview.
+ *
+ */
 public class EventAdapter extends BaseAdapter {
 
 	private Activity activity;
@@ -20,27 +26,39 @@ public class EventAdapter extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	private ArrayList<Integer> headerPositions;
 	long gmtComp = 18000000;
-
+	/**
+	 * 
+	 * @param activity The activity that the adapter is constructed within
+	 * @param eventList The data structure containing the events and the info about them.
+	 */
 	public EventAdapter(Activity activity, ArrayList<HashMap<String, String>> eventList) {
 		this.activity = activity;
 		this.eventList = eventList;
 		inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		headerPositions = getHeaderPositions(eventList);
 	}
-
+	/**
+	 * Find where the date headers will be in the list view
+	 * @param eventList The events and their data in a data structure
+	 * @return The positions of where the headers will be in the events list
+	 */
 	private ArrayList<Integer> getHeaderPositions(ArrayList<HashMap<String, String>> eventList) {
-		//need to also sort eventList
+		//need to also sort eventList.
+		//save the positions into an array which will
+		//remember where each object is located
 		int[] positions = new int[eventList.size()];
 		for (int i = 0; i < eventList.size(); i++) {
 			positions[i] = i;
 		}
 
-		//round each event datetime to just a day
+		//Add dates of events to array to be sorted
 		ArrayList<Calendar> dates = new ArrayList<Calendar>();
 		for (int i = 0; i < eventList.size(); i++) {
 			Calendar cal = Calendar.getInstance();
 
 			if (eventList.get(i).get("allday").equals("1")) {
+				//All day events are in UTC timezone (Google spec) so you need to add
+				//a compensation to get the Calendar object to the correct time
 				cal.setTime(new Date( Long.parseLong(eventList.get(i).get("dtstart")) + gmtComp));
 			} else {
 				cal.setTime(new Date( Long.parseLong(eventList.get(i).get("dtstart"))  ));
@@ -51,7 +69,7 @@ public class EventAdapter extends BaseAdapter {
 			calFinal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), 0);
 			dates.add(calFinal);
 		}
-		//sort
+		//bubble sort dates
 		boolean flipped = true;
 		while (flipped) {
 			flipped = false;
@@ -60,7 +78,8 @@ public class EventAdapter extends BaseAdapter {
 					Calendar temp = dates.get(i);
 					dates.set(i, dates.get(i + 1));
 					dates.set(i + 1, temp);
-
+					
+					//Sorting positions also
 					int tempPos = positions[i];
 					positions[i] = positions[i + 1];
 					positions[i + 1] = tempPos;
@@ -69,7 +88,7 @@ public class EventAdapter extends BaseAdapter {
 				}				
 			}
 		}
-		//determine headers
+		//determine header locations
 		ArrayList<Integer> headerPositions = new ArrayList<Integer>();
 		Calendar previous = Calendar.getInstance();
 		previous.setTime(new Date(0));
@@ -83,7 +102,7 @@ public class EventAdapter extends BaseAdapter {
 			previous = dates.get(i);
 		}
 
-		//sort eventlist
+		//sort eventlist by getting positions from sorted array
 		ArrayList<HashMap<String, String>> sortedEventList = new ArrayList<HashMap<String, String>>();
 		for (int i = 0; i < eventList.size(); i++) {
 			sortedEventList.add(eventList.get(positions[i]));
@@ -107,7 +126,10 @@ public class EventAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	/**
+	 * Every entry in the event list has a built in header, but if that event
+	 * is not in a header location then the header is set invisible.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
@@ -144,7 +166,8 @@ public class EventAdapter extends BaseAdapter {
 			start_cal.setTime(new Date(Long.parseLong(eventEntry.get("dtstart"))));
 			Calendar end_cal = Calendar.getInstance();
 			end_cal.setTime(new Date(Long.parseLong(eventEntry.get("dtend"))));
-
+			
+			//Include date if the event spans multiple days.
 			boolean includeDate = false;
 			if (start_cal.get(Calendar.DATE)  != end_cal.get(Calendar.DATE)  ||
 					start_cal.get(Calendar.MONTH) != end_cal.get(Calendar.MONTH) ||
@@ -205,6 +228,11 @@ public class EventAdapter extends BaseAdapter {
 		return dateStr;
 	}
 
+	/**
+	 * 
+	 * @param pos of event in the list
+	 * @return The description of the selected event
+	 */
 	public String getDescription(int pos) {
 		return eventList.get(pos).get("description");
 	}

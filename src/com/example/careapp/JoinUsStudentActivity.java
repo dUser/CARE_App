@@ -1,27 +1,31 @@
 package com.example.careapp;
 
-import java.util.ArrayList;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
+/**
+ * 
+ *  Launches browser to join us student webpage link. Students joining the
+ *  program is done through a web form so this the only way to do this for now.
+ *
+ */
 public class JoinUsStudentActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_us_student);
-
+		
+		String url = "http://intraweb.stockton.edu/eyos/page.cfm?siteID=21&pageID=20&action=JForm";
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(url));
+		startActivity(intent);
 
 
 
@@ -29,9 +33,17 @@ public class JoinUsStudentActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
+	@Override
+	/**
+	 * So when the user clicks back after viewing the webpage, they aren't taken to a blank screen.
+	 */
+	public void onWindowFocusChanged(boolean hasFocus) {
+		if (hasFocus) {
+			onBackPressed();
+		}
+	}
 
-
-	public void onSubmitStudentJoinUsForm(View view) {
+/*	public void onSubmitStudentJoinUsForm(View view) {
 
 		ArrayList<Integer> requiredTextControls = new ArrayList<Integer>();
 		requiredTextControls.add(R.id.firstNameControl);
@@ -121,7 +133,7 @@ public class JoinUsStudentActivity extends Activity {
 
 		startActivity(Intent.createChooser(signUp, "Signing up for CARE program"));
 
-	}
+	}*/
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.

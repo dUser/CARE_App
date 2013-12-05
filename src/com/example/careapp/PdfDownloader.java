@@ -17,16 +17,32 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.os.StrictMode;
 import android.widget.Toast;
+/**
+ * 
+ * Class to handle downloading pdfs
+ *
+ */
 
 public class PdfDownloader {
-	//TODO:add null activity protection
 	
 	Activity itsActivity;
 	
+	/**
+	 * 
+	 * @param activity The activity that the pdfdownload is created within
+	 */
 	public PdfDownloader(Activity activity) {
 		itsActivity = activity;
 	}
 	
+	/**
+	 * Download the indicated pdf. Once download display it. If the pdf file
+	 * already exists just display it and don't download.
+	 * 
+	 * @param fileName name to save the pdf locally under
+	 * @param url the pdf is located at
+	 * @param title Title of the pdf
+	 */
 	public void viewPDF(String fileName, String url, String title) {
 		
 		//Check if external storage is available (code from google)
@@ -156,6 +172,10 @@ public class PdfDownloader {
 			Toast.makeText(itsActivity, "External storage is not available. Can't access or download pdf.", Toast.LENGTH_LONG).show();
 		}
 	}
+	
+	/*
+	 * There of different ways of calculating the availble memory, depending on api version.
+	 */
 	
 	@TargetApi(18)
 	private long calculateSize(StatFs fileSysemStats) {

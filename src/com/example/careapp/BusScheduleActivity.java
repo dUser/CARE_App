@@ -9,8 +9,14 @@ import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.os.Build;
 
+/**
+ * 
+ * Display the Stockton bus schedule.
+ */
 public class BusScheduleActivity extends Activity {
-
+	/**
+	 * Load a local html file containing the bus schedule into a webview.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

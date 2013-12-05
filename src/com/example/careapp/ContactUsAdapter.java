@@ -10,13 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+/**
+ * 
+ * Adapter for displaying contacts in the Contact Us listview
+ *
+ */
 public class ContactUsAdapter extends BaseAdapter {
 	
 	private Activity activity;
     private ArrayList<HashMap<String, String>> contactUsList;
     private static LayoutInflater inflater = null;
- 
+    
+    /**
+     * 
+     * @param activity The activity which this adapter is created in
+     * @param contactUsList The data to be displayed in the list
+     */
     public ContactUsAdapter(Activity activity, ArrayList<HashMap<String, String>> contactUsList) {
         this.activity = activity;
         this.contactUsList = contactUsList;
@@ -37,6 +46,10 @@ public class ContactUsAdapter extends BaseAdapter {
 	}
 
 	@Override
+	/**
+	 * @param position Position of the item in the list
+	 * Fills listview item with data.
+	 */
 	public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(convertView == null) {

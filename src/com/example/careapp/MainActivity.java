@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-
+/**
+ * 
+ * Top level interface for user interaction. Contains a grid of buttons for each 
+ * seperate  fucntionality of the app
+ *
+ */
 public class MainActivity extends Activity {
 
 	

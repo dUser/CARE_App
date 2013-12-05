@@ -26,11 +26,19 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * 
+ * Display the local list of important Stockton contacts in a listview.
+ *
+ */
 public class DirectoryActivity extends Activity {
 	SimpleAdapter simpleAdapter;
 	ArrayList<HashMap<String, String>> directoryMap;
-
+	
+	/**
+	 * Read in local text file containing the list of contacts and their information and fill a listview.
+	 * Setup listener to start context menu when an item is clicked.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,7 +116,9 @@ public class DirectoryActivity extends Activity {
 		setupActionBar();
 	}
 	
-	
+	/**
+	 * Create context menu when a listview item is clicked.
+	 */
 	@Override
 	public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenuInfo contextMenuInfo) {
 		super.onCreateContextMenu(contextMenu, view, contextMenuInfo);
@@ -121,7 +131,9 @@ public class DirectoryActivity extends Activity {
 		}
 
 	}
-	
+	/**
+	 * Call when a context menu is clicked. Depending in the users selection either call or go to webpage.
+	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
 		//TODO:need to add validity checking
