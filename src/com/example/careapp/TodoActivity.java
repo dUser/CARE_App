@@ -367,10 +367,32 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 				displaySettings();
 			}
 			return true;
+		
+		case R.id.action_help:
+			displayHelp();
+			
 			
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	private void displayHelp() {
+		String help = "If you edit or remove an item from the Todo list it will be" +
+				" updated on the calendar. \n\nIf you remove or edit item from the calendar directly" +
+				" it will not be updated from the Todo list and you will have to manually update it";
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Help");
+		builder.setMessage(help);
+		builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+		builder.create().show();
+			
+	}
+		
 	
 	@TargetApi(14)
 	private void displaySettings() {

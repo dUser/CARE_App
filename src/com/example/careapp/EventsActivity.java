@@ -101,7 +101,7 @@ public class EventsActivity extends Activity {
 			} else {
 				//you need a care calendar
 				String errorStr = "Please subscribe to the Stockton CARE Program Google calendar. Instructions on how " +
-						"to do this can be found within this app.";
+						"to do this can be found in the top menu under help.";
 				Toast.makeText(this,errorStr , Toast.LENGTH_LONG).show();
 				//TODO:other way of getting info if user doesn't follow Stockton CARE calendar
 				//startCalendar_2();
@@ -325,9 +325,33 @@ public class EventsActivity extends Activity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		
+		case R.id.action_help:
+			displayHelp();
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	private void displayHelp() {
+		String subscribe = "Go to calendar.google.com and under Other calendars enter " +
+				"in 'Add a friend's calendar' care@stockton.edu and press enter." +
+				"\n\nMake sure Care Stockton is added under other calendars in both the webpage" +
+				" and under your Android calendar";
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Help");
+		builder.setMessage(subscribe);
+		builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+			}
+		});
+		builder.create().show();
+			
+	}
+		
+	
 	@TargetApi(14)
 	private String getCalendars() {
 		// Projection array. Creating indices for this array instead of doing
