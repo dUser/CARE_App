@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -83,6 +84,14 @@ public class ResourcesActivity extends Activity {
 	               }
               
 	           });
+	    builder.setNegativeButton("Cancel", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// cancel
+				
+			}
+		});
 	    builder.create().show();
 	}
 	

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.careapp"
     android:versionCode="1"
@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <!-- Need 14 minSDK for Calendar API -->
     <uses-sdk
         android:minSdkVersion="10"
@@ -41,6 +41,7 @@
         <activity
             android:name="com.example.careapp.TodoActivity"
             android:label="@string/title_activity_todo"
+            android:launchMode="singleTop"
             android:parentActivityName="com.example.careapp.MainActivity"
             android:windowSoftInputMode="stateUnchanged" >
             <meta-data
@@ -143,6 +144,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.careapp.ResourcesActivity" />
         </activity>
+        <activity
+            android:name="com.example.careapp.JoinUsFacultyFormActivity"
+            android:label="@string/title_activity_join_us_faculty_form" >
+        </activity>
     </application>
 
 </manifest>
+
+

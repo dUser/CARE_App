@@ -1,41 +1,32 @@
 package com.example.careapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Build;
 
-public class JoinUsFacultyActivity extends Activity {
+public class JoinUsFacultyFormActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_join_us_faculty);
+		setContentView(R.layout.activity_join_us_faculty_form);
 		
-		WebView webView = (WebView) findViewById(R.id.joinUsFacultyWebView);		
-		webView.loadUrl("file:///android_asset/join_us_faculty.html"); 
+		
+		WebView webView = (WebView) findViewById(R.id.joinUsFacultyFormWebView);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.loadUrl("https://docs.google.com/spreadsheet/viewform?pli=1&formkey=dDNmMjlzLTc3Y1ZpSHUyM1lLejgtSmc6MA#gid=0");
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
 	
-	public void onFacultyJoin(View view) {
-    	Intent intent = new Intent(this, JoinUsFacultyFormActivity.class);
-        startActivity(intent);
-	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -50,7 +41,7 @@ public class JoinUsFacultyActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.join_us_faculty, menu);
+		getMenuInflater().inflate(R.menu.join_us_faculty_form, menu);
 		return true;
 	}
 

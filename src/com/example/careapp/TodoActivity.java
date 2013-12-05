@@ -150,7 +150,8 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			try {
 				
 				String event_settings = "";
-				for (int i = 0; i < NUM_RADIO_BUTTONS; i++) {
+				event_settings += 0 + "=true" + ",\n"; 
+				for (int i = 1; i < NUM_RADIO_BUTTONS; i++) {
 					event_settings += i + "=false" + ",\n"; 
 				}
 				event_settings += "calendar=__blank__";				
@@ -541,7 +542,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			if (topLayout != null)
 				datePickerView = topLayout.findViewById(R.id.datePicker);
 			if (datePickerView != null) {
-				DatePicker datePicker = (DatePicker) datePickerView;				
+				DatePicker datePicker = (DatePicker) datePickerView;			
 				EditText eventNameEditText = (EditText) this.findViewById(R.id.todo_event_name);
 				String eventName = eventNameEditText.getText().toString();
 				if (eventName == null || eventName.length() == 0) {
@@ -604,6 +605,12 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			}
 		}	
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		int i = resultCode;
+	}
+	
 	@TargetApi(14)
 	private void writeToCalendar(DatePicker datePicker, TimePicker timePicker, HashMap<String, String> newEntry) {
 		
@@ -621,7 +628,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
 		        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, beginTime.getTimeInMillis())
 		        .putExtra(Events.TITLE, newEntry.get("name"));
-				startActivity(intent);
+				this.startActivityForResult(intent, 1);
 				
 				
 			} else {
@@ -632,7 +639,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		        .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
 		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
 		        .putExtra(Events.TITLE, newEntry.get("name"));
-				startActivity(intent);
+				startActivityForResult(intent, 1);
 			}
 			newEntry.put("id", String.valueOf(getEventId(newEntry.get("name"), beginTime.getTimeInMillis())));
 

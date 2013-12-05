@@ -17,6 +17,12 @@
         android:drawableLeft="@drawable/directory"
         android:background="@drawable/main_selector"
         android:layout_margin="2dp"  />      
+
+    <ListView
+        android:id="@+id/resourcesListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
      <Button
         android:onClick="onWorkshopsButton"  
         android:text="Workshop materials" 
@@ -26,13 +32,6 @@
         android:drawableLeft="@drawable/forms"
         android:background="@drawable/main_selector"
         android:layout_margin="2dp"  />  
-
-    <ListView
-        android:id="@+id/resourcesListView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    
-
 
 
 </LinearLayout>
