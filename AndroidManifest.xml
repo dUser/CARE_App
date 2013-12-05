@@ -145,7 +145,11 @@
         </activity>
         <activity
             android:name="com.example.careapp.JoinUsFacultyFormActivity"
-            android:label="@string/title_activity_join_us_faculty_form" >
+            android:label="@string/title_activity_join_us_faculty_form" 
+            android:parentActivityName="com.example.careapp.JoinUsFacultyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.careapp.JoinUsFacultyActivity" />
         </activity>
     </application>
 

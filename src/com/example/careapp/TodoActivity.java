@@ -63,6 +63,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	TodoDialog todoDialog;
 	View topSettingsView;
 	
+	final int NUM_RADIO_BUTTONS = 2;
 	boolean[] savedSettings;
 	boolean[] workingSettings;
 	String savedCalName;
@@ -135,7 +136,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	} //end onCreate
 
 	private void initSettings() {
-		final int NUM_RADIO_BUTTONS = 4;
+
 		boolean creationSuccessful = true;
 
 		// create file if it doesn't exist
@@ -381,18 +382,18 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
         	builder.setView(topSettingsView);
         	final RadioButton radio_dont_synch_to_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_dont_synch_to_cal);
         	final RadioButton radio_synch_to_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_synch_to_cal);
-        	final RadioButton radio_choose_cal_every = (RadioButton) topSettingsView.findViewById(R.id.radio_choose_cal_every);
-        	final RadioButton radio_set_synch_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_set_synch_cal);
+        	//final RadioButton radio_choose_cal_every = (RadioButton) topSettingsView.findViewById(R.id.radio_choose_cal_every);
+        	//final RadioButton radio_set_synch_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_set_synch_cal);
         	final EditText calendarName = (EditText) topSettingsView.findViewById(R.id.synched_todo_calendar);
         	radio_dont_synch_to_cal.setChecked(savedSettings[0]);
         	radio_synch_to_cal.setChecked(savedSettings[1]);
-        	radio_choose_cal_every.setChecked(savedSettings[2]);
-        	radio_set_synch_cal.setChecked(savedSettings[3]);
+        	//radio_choose_cal_every.setChecked(savedSettings[2]);
+        	//radio_set_synch_cal.setChecked(savedSettings[3]);
         	
         	onSynchRadioButtonClicked(radio_dont_synch_to_cal);      	
         	onSynchRadioButtonClicked(radio_synch_to_cal);
-        	onCalRadioButtonClicked(radio_choose_cal_every);
-        	onCalRadioButtonClicked(radio_set_synch_cal);
+        	//onCalRadioButtonClicked(radio_choose_cal_every);
+        	//onCalRadioButtonClicked(radio_set_synch_cal);
 
         	if (!savedCalName.equals("__blank__")) {
         		calendarName.setHint("");
@@ -401,13 +402,13 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
         	
         	builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         		public void onClick(DialogInterface dialog, int id) {
-        			if (!(calendarName.getText().toString().length() > 0) && radio_set_synch_cal.isChecked() ) {
+        			if (!(calendarName.getText().toString().length() > 0) && radio_synch_to_cal.isChecked() ) {
         				Toast.makeText(TodoActivity.this, "You need to specify a calendar, not saving.", Toast.LENGTH_LONG).show();        				
         			} else {
            				workingSettings[0] = radio_dont_synch_to_cal.isChecked();
         				workingSettings[1] = radio_synch_to_cal.isChecked();
-        				workingSettings[2] = radio_choose_cal_every.isChecked();
-        				workingSettings[3] = radio_set_synch_cal.isChecked();
+        				//workingSettings[2] = radio_choose_cal_every.isChecked();
+        				//workingSettings[3] = radio_set_synch_cal.isChecked();
         				workingCalName = calendarName.getText().toString();
         				if ("".equals(workingCalName)) {
         					workingCalName = "__blank__";
@@ -443,7 +444,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	private void saveSettingChanges() {
 
 		boolean writeSuccessful = true;
-		final int NUM_RADIO_BUTTONS = 4;
+
 		try {
 			String event_settings = "";
 			for (int i = 0; i < NUM_RADIO_BUTTONS; i++) {
@@ -464,7 +465,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	}
 	public void onSynchRadioButtonClicked(View view) {
 		
-    	LinearLayout synch_calendar_group = (LinearLayout) topSettingsView.findViewById(R.id.synch_calendar_group);
+    	//LinearLayout synch_calendar_group = (LinearLayout) topSettingsView.findViewById(R.id.synch_calendar_group);
     	EditText synched_todo_calendar = (EditText) topSettingsView.findViewById(R.id.synched_todo_calendar);
 
 	    // Is the button now checked?
@@ -474,44 +475,46 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	    switch(view.getId()) {
 	        case R.id.radio_dont_synch_to_cal:
 	            if (checked) {
-	                synch_calendar_group.setVisibility(View.GONE);
-	                
-	                RadioButton radio_choose_cal_every = (RadioButton) topSettingsView.findViewById(R.id.radio_choose_cal_every);
-	                radio_choose_cal_every.setChecked(true);
-
-	                RadioButton radio_set_synch_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_set_synch_cal);
-	                radio_set_synch_cal.setChecked(false);
+	                //synch_calendar_group.setVisibility(View.GONE);
 	            	synched_todo_calendar.setVisibility(View.GONE);
+	            	
+	                //RadioButton radio_choose_cal_every = (RadioButton) topSettingsView.findViewById(R.id.radio_choose_cal_every);
+	                //radio_choose_cal_every.setChecked(true);
+
+	                //RadioButton radio_set_synch_cal = (RadioButton) topSettingsView.findViewById(R.id.radio_set_synch_cal);
+	                //radio_set_synch_cal.setChecked(false);
+	            	//synched_todo_calendar.setVisibility(View.GONE);
 	            }
 	            break;
 	        case R.id.radio_synch_to_cal:
 	            if (checked) {
-	                synch_calendar_group.setVisibility(View.VISIBLE);
-	            }
-	            break;
-	    }
-	}
-	public void onCalRadioButtonClicked(View view) {
-		
-    	EditText synched_todo_calendar = (EditText) topSettingsView.findViewById(R.id.synched_todo_calendar);
-
-	    // Is the button now checked?
-	    boolean checked = ((RadioButton) view).isChecked();
-	    
-	    // Check which radio button was clicked
-	    switch(view.getId()) {
-	        case R.id.radio_choose_cal_every:
-	            if (checked) {
-	            	synched_todo_calendar.setVisibility(View.GONE);
-	            }
-	            break;
-	        case R.id.radio_set_synch_cal:
-	            if (checked) {
+	                //synch_calendar_group.setVisibility(View.VISIBLE);
 	            	synched_todo_calendar.setVisibility(View.VISIBLE);
 	            }
 	            break;
 	    }
 	}
+//	public void onCalRadioButtonClicked(View view) {
+//		
+//    	EditText synched_todo_calendar = (EditText) topSettingsView.findViewById(R.id.synched_todo_calendar);
+//
+//	    // Is the button now checked?
+//	    boolean checked = ((RadioButton) view).isChecked();
+//	    
+//	    // Check which radio button was clicked
+//	    switch(view.getId()) {
+//	        case R.id.radio_choose_cal_every:
+//	            if (checked) {
+//	            	synched_todo_calendar.setVisibility(View.GONE);
+//	            }
+//	            break;
+//	        case R.id.radio_set_synch_cal:
+//	            if (checked) {
+//	            	synched_todo_calendar.setVisibility(View.VISIBLE);
+//	            }
+//	            break;
+//	    }
+//	}
 	private void displaySettingsUnavailable() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Settings Unavailable");
@@ -605,11 +608,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			}
 		}	
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		int i = resultCode;
-	}
+
 	
 	@TargetApi(14)
 	private void writeToCalendar(DatePicker datePicker, TimePicker timePicker, HashMap<String, String> newEntry) {
@@ -617,34 +616,43 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		int day = datePicker.getDayOfMonth();
 		int month = datePicker.getMonth() + 1;
 		int year = datePicker.getYear();
-		
+		/*
+		 * The following doesn't work because in order to work properly this activity needs to wait for the 
+		 * user to finish with the opened calendar intent. However because the calendar intent is configured with  
+		 * launch setting like singleTop that doesn't allow me to use startActivityForResult (which would allow
+		 * that behavior), so for now this doesn't work.
+		 * 
+		 */
 		//choose every time
-		if (savedSettings[1] && savedSettings[2]) {
-			Calendar beginTime = Calendar.getInstance();
-			if (timePicker != null) {
-				beginTime.set(year, month - 1, day, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-				Intent intent = new Intent(Intent.ACTION_INSERT)
-		        .setData(Events.CONTENT_URI)
-		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-		        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, beginTime.getTimeInMillis())
-		        .putExtra(Events.TITLE, newEntry.get("name"));
-				this.startActivityForResult(intent, 1);
-				
-				
-			} else {
-				//all day
-				beginTime.set(year, month - 1, day, 0, 0);
-				Intent intent = new Intent(Intent.ACTION_INSERT)
-		        .setData(Events.CONTENT_URI)
-		        .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
-		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-		        .putExtra(Events.TITLE, newEntry.get("name"));
-				startActivityForResult(intent, 1);
-			}
-			newEntry.put("id", String.valueOf(getEventId(newEntry.get("name"), beginTime.getTimeInMillis())));
+//		if (savedSettings[1] && savedSettings[2]) {
+//			Calendar beginTime = Calendar.getInstance();
+//			if (timePicker != null) {
+//				beginTime.set(year, month - 1, day, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+//				Intent intent = new Intent(Intent.ACTION_INSERT)
+//		        .setData(Events.CONTENT_URI)
+//		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+//		        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, beginTime.getTimeInMillis())
+//		        .putExtra(Events.TITLE, newEntry.get("name"));
+//				startActivity(intent);
+//				
+//				
+//			} else {
+//				//all day
+//				beginTime.set(year, month - 1, day, 0, 0);
+//				Intent intent = new Intent(Intent.ACTION_INSERT)
+//		        .setData(Events.CONTENT_URI)
+//		        .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
+//		        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+//		        .putExtra(Events.TITLE, newEntry.get("name"));
+//				startActivity(intent);
+//			}
+//			newEntry.put("id", String.valueOf(getEventId(newEntry.get("name"), beginTime.getTimeInMillis())));
 
 			//use stored calendar name	
-		} else if (savedSettings[1] &&  savedSettings[3]) {
+//		} else if (savedSettings[1] &&  savedSettings[3]) {
+		
+		//use stored calendar name	
+		if (savedSettings[1]) {
 			long calID = getCalendarId(savedCalName);
 			if (calID == -1) {
 				//couldn't get the id

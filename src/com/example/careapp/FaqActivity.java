@@ -1,40 +1,69 @@
 package com.example.careapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
+import android.widget.Button;
 
 public class FaqActivity extends Activity {
-
+	boolean mentorsView;
+	final int SELECTED   = 0xFF0099CC;
+	final int UNSELECTED = 0xFF8AD5F0;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_faq);
 		
+		mentorsView = true;
 		
 		WebView webView = (WebView) findViewById(R.id.faqWebView);	
 		
 		//get text of faq html		
-		webView.loadUrl("file:///android_asset/faq.html");
+		webView.loadUrl("file:///android_asset/faq_mentors.html");
 		
+
+
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
+	public void onMentorsFaqButton(View view) {
+		if (!mentorsView) {
+			
+			mentorsView = true;	
+			
+			((Button) view).setBackgroundColor(SELECTED);
+			Button studentButton = (Button) findViewById(R.id.studentsFaqButton);
+			studentButton.setBackgroundColor(UNSELECTED);
+			 
+			WebView webView = (WebView) findViewById(R.id.faqWebView);	
 
+			//get text of faq html		
+			webView.loadUrl("file:///android_asset/faq_mentors.html");
+		}
+	}
+	public void onStudentsFaqButton(View view) {
+		if (mentorsView) {
+			
+			mentorsView = false;
+			
+			((Button) view).setBackgroundColor(SELECTED);
+			Button mentorButton = (Button) findViewById(R.id.mentorsFaqButton);
+			mentorButton.setBackgroundColor(UNSELECTED);
+			
+			WebView webView = (WebView) findViewById(R.id.faqWebView);	
+
+			//get text of faq html		
+			webView.loadUrl("file:///android_asset/faq_students.html");
+		}
+	}
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */

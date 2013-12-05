@@ -6,47 +6,57 @@
     <RadioGroup
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:paddingLeft="10dp"
     	android:orientation="vertical">
     	<RadioButton android:id="@+id/radio_dont_synch_to_cal"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:text="Don't synch calendar"
+        	android:text="Don't sync calendar"
         	android:onClick="onSynchRadioButtonClicked"/>
     	<RadioButton android:id="@+id/radio_synch_to_cal"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:text="Synch to calendar"
+        	android:text="Sync to calendar"
         	android:onClick="onSynchRadioButtonClicked"/>
 	</RadioGroup>
-	<LinearLayout
-	    android:id="@+id/synch_calendar_group"
-	    android:layout_width="match_parent"
+	<LinearLayout 
+     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	android:visibility="gone" >
-    	<RadioGroup
-    		android:layout_width="fill_parent"
+    	android:paddingLeft="10dp"
+    	android:paddingRight="10dp"	
+    	android:paddingBottom="5dp"		>
+    	<EditText android:id="@+id/synched_todo_calendar"
+     	   android:layout_width="match_parent"
     		android:layout_height="wrap_content"
-    		android:orientation="vertical">
-    		<RadioButton android:id="@+id/radio_choose_cal_every"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:text="Choose calendar every time"
-        		android:onClick="onCalRadioButtonClicked"/>
-    		<RadioButton android:id="@+id/radio_set_synch_cal"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:text="Set calendar to synch"
-        		android:onClick="onCalRadioButtonClicked"/>
-		</RadioGroup>
-		<EditText android:id="@+id/synched_todo_calendar"
-		    android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:hint="Calendar name to synch"
-    		android:visibility="gone" />
-    
-	    
-	    
-	</LinearLayout>
+    		android:hint="Calendar name to sync"
+    		android:visibility="gone" />    
+    </LinearLayout>
+<!-- 	<LinearLayout -->
+<!-- 	    android:id="@+id/synch_calendar_group" -->
+<!-- 	    android:layout_width="match_parent" -->
+<!--     	android:layout_height="wrap_content" -->
+<!--     	android:orientation="vertical" -->
+<!--     	android:visibility="gone" > -->
+<!--     	<RadioGroup -->
+<!--     		android:layout_width="fill_parent" -->
+<!--     		android:layout_height="wrap_content" -->
+<!--     		android:orientation="vertical"> -->
+<!--     		<RadioButton android:id="@+id/radio_choose_cal_every" -->
+<!--         		android:layout_width="wrap_content" -->
+<!--         		android:layout_height="wrap_content" -->
+<!--         		android:text="Choose calendar every time" -->
+<!--         		android:onClick="onCalRadioButtonClicked"/> -->
+<!--     		<RadioButton android:id="@+id/radio_set_synch_cal" -->
+<!--         		android:layout_width="wrap_content" -->
+<!--         		android:layout_height="wrap_content" -->
+<!--         		android:text="Set calendar to synch" -->
+<!--         		android:onClick="onCalRadioButtonClicked"/> -->
+<!-- 		</RadioGroup> -->
+<!-- 		<EditText android:id="@+id/synched_todo_calendar" -->
+<!-- 		    android:layout_width="match_parent" -->
+<!--     		android:layout_height="wrap_content" -->
+<!--     		android:hint="Calendar name to synch" -->
+<!--     		android:visibility="gone" /> -->
+<!-- 	</LinearLayout> -->
 
 </LinearLayout>

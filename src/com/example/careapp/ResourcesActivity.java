@@ -80,7 +80,7 @@ public class ResourcesActivity extends Activity {
 	        		   case 1: Intent faculty_intent = new Intent(ResourcesActivity.this, JoinUsFacultyActivity.class);
    		   					   ResourcesActivity.this.startActivity(faculty_intent); 	
 	        			   break;
-	        		   }
+	        		   } 
 	               }
               
 	           });

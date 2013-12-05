@@ -53,7 +53,6 @@ public class PdfDownloader {
 			File file = new File(itsActivity.getExternalFilesDir(null), fileName + ".pdf");
 			
 	        if (file.exists()) {
-	        	Toast.makeText(itsActivity, file.getPath(), Toast.LENGTH_LONG).show();
 	        	
 	            Uri path = Uri.fromFile(file);
 	            Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -105,8 +104,7 @@ public class PdfDownloader {
 	        	    	//Oh well, try to download anyway, there is more than likely enough space
 	        	    }
 	        	    
-	        	    if (availableBytes >= pdfSize) {
-		        		Toast.makeText(itsActivity, Long.toString(availableBytes), Toast.LENGTH_LONG).show();	        	    	
+	        	    if (availableBytes >= pdfSize) {        	    	
 
 	        	    	//Download the pdf
 	        			DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -123,7 +121,6 @@ public class PdfDownloader {
 						}
 	        			//show downloaded file
 	        			File downloadFile = new File(itsActivity.getExternalFilesDir(null), fileName + ".pdf");
-	        			Toast.makeText(itsActivity, downloadFile.getPath(), Toast.LENGTH_LONG).show();
 	        			
 	        	        if (downloadFile.exists()) {
 	        	            Uri path = Uri.fromFile(downloadFile);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 
@@ -25,9 +26,16 @@ public class JoinUsFacultyActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_join_us_faculty);
 		
-		WebView webView = (WebView) findViewById(R.id.joinUsFacultyWebView);		
-		webView.loadUrl("file:///android_asset/join_us_faculty.html"); 
+ 		
+		int screenLayout = getResources().getConfiguration().screenLayout;
 		
+		WebView webView = (WebView) findViewById(R.id.joinUsFacultyWebView);
+		if ( (screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL  ||
+			 (screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+			webView.loadUrl("file:///android_asset/join_us_faculty_small.html"); 
+		} else {
+			 webView.loadUrl("file:///android_asset/join_us_faculty.html"); 
+		}
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
