@@ -21,7 +21,7 @@ public class ResourcesActivity extends Activity {
 	 ListView resourceListView;
 	 
 	 String[] resourcesTitles = {"Office Locations & Phone Numbers", "Mentee Improvement Plan", "Mentee Weekly Update",
-			 					 "Personal Mentor (Faculty & Staff) Guidebook", "FAQ's"};
+			 					 "Personal Mentor (Faculty & Staff) Guidebook", "Bus Schedule", "FAQ's"};
 	 PdfDownloader pdfDownloader;
 	
 
@@ -59,9 +59,16 @@ public class ResourcesActivity extends Activity {
 			break;
 		case 3: onGuidebookButton(view);
 			break;
-		case 4: onFAQButton(view);
-			break;						
+		case 4: onBusScheduleButton(view);
+			break;
+		case 5: onFAQButton(view);
+			break;		
 		}
+	}
+
+	private void onBusScheduleButton(View view) {
+	    Intent intent = new Intent(this, BusScheduleActivity.class);
+	    startActivity(intent);
 	}
 
 	//Button Listeners
@@ -80,7 +87,7 @@ public class ResourcesActivity extends Activity {
 	        		   case 1: Intent faculty_intent = new Intent(ResourcesActivity.this, JoinUsFacultyActivity.class);
    		   					   ResourcesActivity.this.startActivity(faculty_intent); 	
 	        			   break;
-	        		   } 
+	        		   }  
 	               }
               
 	           });

@@ -99,5 +99,6 @@
     <string name="title_activity_join_us_faculty">JoinUsFacultyActivity</string>
     <string name="title_activity_weekly_update">WeeklyUpdateActivity</string>
     <string name="title_activity_join_us_faculty_form">JoinUsFacultyFormActivity</string>
+    <string name="title_activity_bus_schedule">Bus Schedule</string>
 
 </resources>
