@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.careapp"
     android:versionCode="1"
@@ -41,7 +41,6 @@
         <activity
             android:name="com.example.careapp.TodoActivity"
             android:label="@string/title_activity_todo"
-            android:launchMode="singleTop"
             android:parentActivityName="com.example.careapp.MainActivity"
             android:windowSoftInputMode="stateUnchanged" >
             <meta-data
