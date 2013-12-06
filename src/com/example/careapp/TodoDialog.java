@@ -10,14 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
+/**
+ * 
+ * The dialog presented that displays the date/time for selection when the user
+ * adds an event to the todo list. 
+ *
+ */
 public class TodoDialog extends DialogFragment {
 	
 	boolean timeSelected = false;
 	
 	boolean timeSelected() { return timeSelected; }
 
-//============Setup the passing of events back to the dialog host======================
+//============Setup the passing of events back to the dialog host as specified by Google======================
 	
 	/* The activity that creates an instance of this dialog fragment must
      * implement this interface in order to receive event callbacks.
@@ -44,12 +49,15 @@ public class TodoDialog extends DialogFragment {
         }
     }
     
-  //============Setup the passing of events back to the dialog host======================
+  //============Setup the passing of events back to the dialog host as specified by Google======================
     
     
     
     
 	@Override
+	/**
+	 * Constructs dialog menu for selecting the date/time when a user adds to events to todo lsit
+	 */
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
 
@@ -87,6 +95,9 @@ public class TodoDialog extends DialogFragment {
 
 
 	@Override
+	/**
+	 * Settings up "Time" button in the dialog menu, so the user can optionally add a time to the event they're creating.
+	 */
 	public void onStart() {
 		super.onStart();    //super.onStart() is where dialog.show() is actually called on the underlying dialog, so we have to do it after this point
 		final AlertDialog d = (AlertDialog)getDialog();

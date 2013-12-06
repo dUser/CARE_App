@@ -42,7 +42,12 @@ import com.google.gdata.util.ServiceException;
  * 
  */
 
-
+/**
+ * 
+ * Displays events pulled from the local CARE program google calendar in a listview
+ * Events on the same day are grouped under the same date heading.
+ *
+ */
 public class EventsActivity extends Activity {
 	ArrayList<HashMap<String, String>> events = new ArrayList<HashMap<String,String>>();
 	EventAdapter adapter;

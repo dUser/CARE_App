@@ -55,7 +55,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.careapp.TodoDialog.TodoDialogListener;
-
+/**
+ * 
+ * Displays a todo list which propgates to the devices Google calendar
+ *
+ */
 public class TodoActivity extends FragmentActivity implements TodoDialogListener {
 
 	ArrayList<HashMap<String, String>> todoMap; //to store hashmap ArrayList from parser
@@ -77,7 +81,7 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		setContentView(R.layout.activity_todo);
 		boolean creationSuccessful = true;
 
-		// create blank file if it doesn't exist
+		// create blank todo data file if it doesn't exist
 		boolean todoExists = true;
 		try {
 			FileInputStream todoIn = this.openFileInput("todo.txt");
@@ -92,7 +96,8 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 				Toast.makeText(this, "Couldn't create new todo file: " + e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		}
-
+		
+		//If the file creation was successful or the file already exists, then read it in.
 		boolean readSuccessful = true;
 		if (creationSuccessful) {
 			//read in todo file
@@ -104,7 +109,8 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 				Toast.makeText(this, "Couldn't open todo file:  " + e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 			if (readSuccessful) {
-
+				
+				//Set up listview and adapter
 				TodoParser dp = new TodoParser(todoListStr);
 				todoMap = dp.getTodoList();
 				ListView listView = (ListView) findViewById(R.id.todo_listView);				
@@ -114,12 +120,17 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 				listView.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
+					/**
+					 * Not called because of the button click listeners on the textviews
+					 * within each list view item
+					 */
 					public void onItemClick(AdapterView<?> arg0, View view, int pos, long id) {
 						// on click listeners block on text views in listitems keep this function
 						// from receiving clicks
 					}
 
 				});
+				//If the user has a high enough android version load the calendar settings they have setup.
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 					initSettings();
 				}
@@ -135,11 +146,15 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 
 	} //end onCreate
 
+	
+	/**
+	 * Create blank todo setings data file if it doesn't exist, or if they do read them in
+	 */
 	private void initSettings() {
 
 		boolean creationSuccessful = true;
 
-		// create file if it doesn't exist
+		// create todo settings data file if it doesn't exist
 		boolean settingsExists = true;
 		try {
 			FileInputStream todoIn = this.openFileInput("todo_settings.txt");
@@ -150,6 +165,10 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			
 			try {
 				
+				//Create data file string in correct format
+				//1=[true|false],2=[true|false],
+				// ...
+				//calendar=[calendar name]
 				String event_settings = "";
 				event_settings += 0 + "=true" + ",\n"; 
 				for (int i = 1; i < NUM_RADIO_BUTTONS; i++) {
@@ -191,7 +210,10 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		}
 		
 	}
-
+	/**
+	 * Called when user clicks on submit changes button to delete todo list event entries
+	 * @param view submitChanges button view
+	 */
 	public void onSubmitChanges(View view) {
 		if (adapter != null) {
 			boolean writeSuccessful = true;
@@ -240,7 +262,12 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			}
 		} // end if adapter != null
 	}	
-
+	/**
+	 * Deletes an event from the google calendar data base, making sure it exists
+	 * @param eventID id of the event as stored in the google calendar database
+	 * @param title event name
+	 * @param date event date
+	 */
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	private void deleteRow(long eventID, String title, String date) {
 		if (eventID != -1) {
@@ -253,6 +280,13 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 
 		}
 	}
+	/**
+	 * Check to make sure event with given id has the given name and date
+	 * @param eventID eventID id of the event as stored in the google calendar database
+	 * @param title event name
+	 * @param date event date
+	 * @return whether the database entry with the given id has the same title and date 
+	 */
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public boolean verifiyEventModificationRow(long eventID, String title, String date) {
 		boolean eventIdMatches = false;
@@ -304,6 +338,11 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 
 		return eventIdMatches;
 	}
+	/**
+	 * Called when user clicks add button, starts time/date selection dialog.
+	 * 
+	 * @param view View of add button
+	 */
  	public void onAdd(View view) {	
 
 		todoDialog = new TodoDialog();
@@ -485,6 +524,10 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 			startActivity(getIntent());
 		}
 	}
+	/**
+	 * Used for toggling the calendar sync settings
+	 * @param view radio button that was clicked
+	 */
 	public void onSynchRadioButtonClicked(View view) {
 		
     	//LinearLayout synch_calendar_group = (LinearLayout) topSettingsView.findViewById(R.id.synch_calendar_group);
@@ -553,11 +596,13 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		
 	}
 
-	/**
-	 * when user clicks ok on add dialog
-	 */
+
 	
 	@Override
+	/**
+	 * When user adds event by clicking ok on add dialog
+	 * @param Dialog that the user just clicked ok on
+	 */
 	public void onDialogPositiveClick(DialogFragment dialog) {
 		//set up vars and ensure no null pointers 
 		if (dialog != null) {
@@ -805,7 +850,12 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		}
 		return calID;
 	}
-
+	/**
+	 * Sorts a data structure of todo events by date
+	 * @param todoListMap lsit of todo events to be sorted
+	 * @return sorted todo list events
+	 * @throws IOException
+	 */
 	private ArrayList<HashMap<String, String>> sort(ArrayList<HashMap<String, String>> todoListMap) throws IOException{
 		ArrayList<SimpleDateFormat> dateFormats = new ArrayList<SimpleDateFormat>();
 
@@ -859,13 +909,21 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		}
 		return returnMap;
 	}
-
+	
+	/**
+	 * User cancels event adding
+	 */
 	@Override
 	public void onDialogNegativeClick(DialogFragment dialog) {
 		//user exits without adding
 		
 	}
-	
+	/**
+	 * Launched dialog for editing a todo event name. If enabled the changes
+	 * will be propagated to the google calendar
+	 * @param view Textview containing the todo item name
+	 * @param position the position in the listview of the selected event
+	 */
 	public void editTodoItemName(View view, int position) {
 		final int pos = position;
 
@@ -954,6 +1012,12 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 		}
 
 	}
+	/**
+	 * Opens dialog for editing date of todo event. If applicable propagates to google calendar,
+	 * @param view Textview containing date of todo event
+	 * @param position position of todo event in listview
+	 */
+	
 	public void editTodoItemDate(View view, int position) {
 		final int pos = position;
 		

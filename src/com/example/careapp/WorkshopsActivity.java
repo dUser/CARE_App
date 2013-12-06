@@ -25,7 +25,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
+/**
+ * 
+ * Display the workshop pdf links in a list view. Clicking will download and display the file if 
+ * it isn't already downloaded.
+ *
+ */
 public class WorkshopsActivity extends Activity {
 	
 	 ListView workshopListView;
@@ -76,49 +81,64 @@ public class WorkshopsActivity extends Activity {
 			break;				
 		}
 	}
-	//Button Listeners
+	//Called when items in list view are clicked
+	/**
+	 * Download and display CAREGoal.pdf
+	 */
 	public void onGoalButton(View view) {
 		String fileName = "goal";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/CAREGoal.pdf";
 		String title = "Goal Setting";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display time management pdf
+	 */	
 	public void onTimeButton(View view) {
 		String fileName = "time";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/CARE_Time_120312.pdf";
 		String title = "Time Management";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display understanding debt pdf
+	 */	
 	public void onDebtButton(View view) {
 		String fileName = "debt";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/Figart%20Presentation%20on%20Understanding%20Consumer%20%20Student%20Debt%20for%20CARE.pdf";
 		String title = "Understanding Debt";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display coping pdf
+	 */	
 	public void onCopingButton(View view) {
 		String fileName = "coping";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/COPING%20WITH%20LIFE%20ON%20CAMPUS.pdf";
 		String title = "Coping on Campus";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display active reading pdf
+	 */	
 	public void onActiveButton(View view) {
 		String fileName = "active";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/CARE%20Active%20Reading%20and%20Listening.pdf";
 		String title = "Active Reading";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display test anxiety pdf
+	 */	
 	public void onTestButton(View view) {
 		String fileName = "test";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/test%20anxiety.pdf";
 		String title = "Test Anxiety";
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
-	
+	/**
+	 * Download and display winning habits pdf
+	 */	
 	public void onHabitsButton(View view) {
 		String fileName = "habits";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE/DEVELOPING%20WINNING%20%20HABITS_GCalicdanApostle_2013.pdf";
