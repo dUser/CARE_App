@@ -4,10 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * 
+ * Parses a string in the specified format into a data structure.
+ * Required input format:
+ * <item>
+ * 	<name> its name <name>
+ *  <date> its date <date>
+ *  <id> its id     <id>
+ * <item>
+ * etc...
+ *
+ */
 public class TodoParser {
 	ArrayList<HashMap<String, String>> todoList = new ArrayList<HashMap<String, String>>();
 	
+	/**
+	 * 
+	 * @param todoListStr A string in the required format to be parsed into a data structure.
+	 * Takes a string in the required format and parses it into a data structure.
+	 * 
+	 */
 	public TodoParser(String todoListStr) {		
 		String[] todo_with_whitespace = todoListStr.split("(<item>)+");
 		ArrayList<String> todo = new ArrayList<String>();
@@ -55,6 +72,10 @@ public class TodoParser {
 			todoList.add(todoMap);
 		}
 	}
+	/**
+	 * Returns the data structure which was parsed from the passed in string.
+	 * @return the data structure represented in the passed in string
+	 */
 	public ArrayList<HashMap<String, String>> getTodoList() {
 		return todoList;
 	}

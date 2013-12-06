@@ -8,7 +8,11 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
-
+/**
+ * 
+ * Displays weekly update google web form in a webview
+ *
+ */
 public class WeeklyUpdateActivity extends Activity {
 
 	@Override
