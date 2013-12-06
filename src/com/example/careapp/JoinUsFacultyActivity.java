@@ -1,22 +1,15 @@
 package com.example.careapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Build;
 /**
  * 
@@ -62,6 +55,9 @@ public class JoinUsFacultyActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Creates and populates the option menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -69,6 +65,9 @@ public class JoinUsFacultyActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Is a switch to pull which option item is selected and then do the appropriate action
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

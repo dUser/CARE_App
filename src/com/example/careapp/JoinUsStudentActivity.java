@@ -34,6 +34,7 @@ public class JoinUsStudentActivity extends Activity {
 		setupActionBar();
 	}
 	@Override
+	
 	/**
 	 * So when the user clicks back after viewing the webpage, they aren't taken to a blank screen.
 	 */
@@ -145,6 +146,9 @@ public class JoinUsStudentActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Creates and populates the option menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -152,6 +156,9 @@ public class JoinUsStudentActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Is a switch to pull which option item is selected and then do the appropriate action
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

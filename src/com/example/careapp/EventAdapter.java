@@ -112,6 +112,9 @@ public class EventAdapter extends BaseAdapter {
 		return headerPositions;
 	}
 
+	/**
+	 * Returns event list size
+	 */
 	@Override
 	public int getCount() {
 		return eventList.size();

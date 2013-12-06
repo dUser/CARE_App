@@ -17,7 +17,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-
+/**
+ * Loads the Android devices Google Calendar in its own activity
+ */
 public class CalendarActivity extends Activity {
 
 	@Override
@@ -33,6 +35,9 @@ public class CalendarActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * Starts the Android Calendar in the activity
+	 */
 	@TargetApi(14)
 	public void startCalendar() {
 		Calendar cal = new GregorianCalendar(); 
@@ -45,6 +50,9 @@ public class CalendarActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	/**
+	 * When back is pressed window closes and goes back to the main activity
+	 */
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		if (hasFocus) {
@@ -53,14 +61,20 @@ public class CalendarActivity extends Activity {
 	}
 	
 	
-
+	/**
+	 * Checks to see if the Android version is Honeycomb or above before setting up 
+	 * action bar.
+	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
-
+	
+	/**
+	 * Creates and populates the option menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -68,7 +82,10 @@ public class CalendarActivity extends Activity {
 		
 		return true;
 	}
-
+	
+	/**
+	 * Is a switch to pull which option item is selected and then do the appropriate action
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

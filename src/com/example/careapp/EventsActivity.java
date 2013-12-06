@@ -304,14 +304,20 @@ public class EventsActivity extends Activity {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
-
+	
+	/**
+	 * Creates and populates the option menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.events, menu);
 		return true;
 	}
-
+	
+	/**
+	 * Is a switch to pull which option item is selected and then do the appropriate action
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -351,7 +357,9 @@ public class EventsActivity extends Activity {
 			
 	}
 		
-	
+	/**
+	 * Returns user calendar
+	 */
 	@TargetApi(14)
 	private String getCalendars() {
 		// Projection array. Creating indices for this array instead of doing

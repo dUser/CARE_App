@@ -32,6 +32,9 @@ public class ContactUsAdapter extends BaseAdapter {
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * Returns the total size of the contact us list.
+     */
     public int getCount() {
         return contactUsList.size();
     }
@@ -39,7 +42,7 @@ public class ContactUsAdapter extends BaseAdapter {
     public Object getItem(int pos) {
         return pos;
     }
-
+    
 	@Override
 	public long getItemId(int pos) {
 		return pos;

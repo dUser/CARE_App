@@ -113,8 +113,9 @@ public class ResourcesActivity extends Activity {
 		});
 	    builder.create().show();
 	}
+	
 	/**
-	 * 
+	 *Downloads or views the office location and phone numbers pdf 
 	 * @param view
 	 */
 	public void onOfficesButton(View view) {
@@ -124,6 +125,10 @@ public class ResourcesActivity extends Activity {
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
+	/**
+	 * Downloads or views the mentee improvement pdf
+	 * @param view
+	 */
 	public void onImprovementButton(View view) {
 		String fileName = "improvement";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/MIP%20in%20Writeable%20%283%29.pdf";
@@ -131,11 +136,19 @@ public class ResourcesActivity extends Activity {
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
+	/**
+	 * Opens the mentee weekly update HTML in an HTML view
+	 * @param view
+	 */
 	public void onUpdateButton(View view) {
 		Intent weekly_update_intent = new Intent(ResourcesActivity.this, WeeklyUpdateActivity.class);
 		ResourcesActivity.this.startActivity(weekly_update_intent); 
 	}
 	
+	/**
+	 * Downloads or views the Mentor Guidebook pdf
+	 * @param view
+	 */
 	public void onGuidebookButton(View view) {
 		String fileName = "guidebook";
 		String url = "http://intraweb.stockton.edu/eyos/dean_students/content/docs/CARE%20Mentor%20Guide%20Book.pdf";
@@ -143,11 +156,19 @@ public class ResourcesActivity extends Activity {
 		pdfDownloader.viewPDF(fileName, url, title);
 	}
 	
+	/**
+	 * Opens the FAQ activity
+	 * @param view
+	 */
 	public void onFAQButton(View view) {
 	    Intent intent = new Intent(this, FaqActivity.class);
 	    startActivity(intent);
 	}
 	
+	/**
+	 * Opens up the Workshop Activity
+	 * @param view
+	 */
 	public void onWorkshopsButton(View view) {
 		Intent intent = new Intent(this, WorkshopsActivity.class);
         startActivity(intent);  
@@ -163,6 +184,9 @@ public class ResourcesActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Creates and populates the option menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -170,6 +194,9 @@ public class ResourcesActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Is a switch to pull which option item is selected and then do the appropriate action
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
