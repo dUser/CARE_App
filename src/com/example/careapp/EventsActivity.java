@@ -106,7 +106,7 @@ public class EventsActivity extends Activity {
 			} else {
 				//you need a care calendar
 				String errorStr = "Please subscribe to the Stockton CARE Program Google calendar. Instructions on how " +
-						"to do this can be found in the top menu under help.";
+						"to do this can be found in the top menu under Help.";
 				Toast.makeText(this,errorStr , Toast.LENGTH_LONG).show();
 				//TODO:other way of getting info if user doesn't follow Stockton CARE calendar
 				//startCalendar_2();
@@ -344,9 +344,10 @@ public class EventsActivity extends Activity {
 	}
 	
 	private void displayHelp() {
-		String subscribe = "Go to calendar.google.com and under Other calendars enter " +
-				"in 'Add a friend's calendar' care@stockton.edu and press enter." +
-				"\n\nMake sure Care Stockton is added under other calendars in both the webpage" +
+		String subscribe = "To add the CARE program Google Calendar to your device " + 
+				"Go to calendar.google.com and under Other calendars " +
+				"in 'Add a friend's calendar' type care@stockton.edu and press enter." +
+				"\n\nMake sure the calendar titled Care Stockton is added on both the webpage" +
 				" and under your Android calendar";
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
