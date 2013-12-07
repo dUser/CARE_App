@@ -418,9 +418,9 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	private void displayHelp() {
 		String help = "If you have set your to-do list to sync with a Google Calendar (under Settings), when you edit or " +
 				"remove an event on the to-do list the modification will also be "    +
-				"updated on the Google Calendar. \n\nHowever, if you remove or edit an " +
-				"event on the Google Calendar directly the change will not be reflected in the "  + 
-				"to-do list, and you will have to manually update the event.";
+				"performed on the event in the Google Calendar. \n\nHowever, if you remove or edit an " +
+				"event from the Google Calendar directly, the change will not be reflected in the "  + 
+				"to-do list and you will have to manually update the event.";
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Help");

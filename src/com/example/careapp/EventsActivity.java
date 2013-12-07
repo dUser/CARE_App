@@ -345,10 +345,10 @@ public class EventsActivity extends Activity {
 	
 	private void displayHelp() {
 		String subscribe = "To add the CARE program Google Calendar to your device " + 
-				"Go to calendar.google.com and under Other calendars " +
+				"go to calendar.google.com and under Other calendars " +
 				"in 'Add a friend's calendar' type care@stockton.edu and press enter." +
 				"\n\nMake sure the calendar titled Care Stockton is added on both the webpage" +
-				" and under your Android calendar";
+				" and under your Android calendar.";
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Help");
