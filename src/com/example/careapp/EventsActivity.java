@@ -252,6 +252,9 @@ public class EventsActivity extends Activity {
 		}
 
 	}
+	/*
+	 * Method not used for now
+	 */
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	private void startCalendar_2() {
 		try {
