@@ -105,7 +105,7 @@ public class EventsActivity extends Activity {
 			
 			} else {
 				//you need a care calendar
-				String errorStr = "Please subscribe to the Stockton CARE Program Google calendar. Instructions on how " +
+				String errorStr = "To view CARE Program events, please subscribe to the Stockton CARE Program Google calendar. Instructions on how " +
 						"to do this can be found in the top menu under Help.";
 				Toast.makeText(this,errorStr , Toast.LENGTH_LONG).show();
 				//TODO:other way of getting info if user doesn't follow Stockton CARE calendar
