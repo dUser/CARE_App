@@ -42,15 +42,16 @@ public class BusScheduleActivity extends Activity {
 		}
 	}
 
-	/**
-	 * Creates and populates the option menu
-	 */
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.bus_schedule, menu);
-		return true;
-	}
+
+//	/**
+//	 * Creates and populates the option menu
+//	 */
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.bus_schedule, menu);
+//		return true;
+//	}
 	/**
 	 * Is a switch to pull which option item is selected and then do the appropriate action
 	 */

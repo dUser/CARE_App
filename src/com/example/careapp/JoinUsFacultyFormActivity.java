@@ -40,15 +40,15 @@ public class JoinUsFacultyFormActivity extends Activity {
 		}
 	}
 
-	/**
-	 * Creates and populates the option menu
-	 */
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.join_us_faculty_form, menu);
-		return true;
-	}
+//	/**
+//	 * Creates and populates the option menu
+//	 */
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.join_us_faculty_form, menu);
+//		return true;
+//	}
 
 	/**
 	 * Is a switch to pull which option item is selected and then do the appropriate action
