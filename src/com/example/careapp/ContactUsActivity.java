@@ -112,10 +112,13 @@ public class ContactUsActivity extends Activity {
 	    			throw new Exception("Error: Invalid url.");
 	    		}
 	    		
-	    		//TODO:need to be able to send not just plain text emails
+	    		//get email of selected person
+	    		String emailAddress = "";
+	    		emailAddress =contactUsMap.get(listId).get("email");
+	    		
 	    		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);  
 	    		emailIntent.setType("plain/text");
-	    		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "" });
+	    		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ emailAddress });
 	    		startActivity(emailIntent);
 	    		
 	    	} catch (Exception e) {
