@@ -783,43 +783,57 @@ public class TodoActivity extends FragmentActivity implements TodoDialogListener
 	@TargetApi(14)
 	private long getEventId(String title, long dtstart) {
 		final String[] EVENT_PROJECTION = new String[] {
-			    Events._ID, 
-			    Events.DTSTART,   
-			    Events.TITLE       
-			};
-			  
-			// The indices for the projection array above.
-			final int PROJECTION_ID_INDEX = 0;
-			final int PROJECTION_DTSTART_INDEX = 1;
-			final int PROJECTION_TITLE_INDEX = 2;
-			
-			// Run query
-			Cursor eventCur = null;
-			ContentResolver eventCr = getContentResolver();
-			Uri eventUri = Events.CONTENT_URI; 
+				Events._ID, 
+				Events.DTSTART,   
+				Events.TITLE       
+		};
 
+		// The indices for the projection array above.
+		final int PROJECTION_ID_INDEX = 0;
+		final int PROJECTION_DTSTART_INDEX = 1;
+		final int PROJECTION_TITLE_INDEX = 2;
+
+		// Run query
+		Cursor eventCur = null;
+		ContentResolver eventCr = getContentResolver();
+		Uri eventUri = Events.CONTENT_URI; 
+
+		//Submit the query and get a Cursor object back. 
+		eventCur = eventCr.query(eventUri, EVENT_PROJECTION, null, null, null);
+
+		// Use the cursor to step through the returned records
+		long id = -1;
+		while (eventCur.moveToNext()) {
+
+			if (eventCur.isLast()) {
+				if(eventCur.getString(PROJECTION_TITLE_INDEX).equals(title) &&
+						eventCur.getLong(PROJECTION_DTSTART_INDEX) == dtstart) {
+					id = eventCur.getLong(PROJECTION_ID_INDEX);
+				}
+			}
+
+		}
+
+		//if, for whatever reason the last row ins't the just added entry, do a query
+		//for the row with the matching name and date (highly unlikely situation)
+
+		if (id == -1) {
 			//Submit the query and get a Cursor object back. 
 			eventCur = eventCr.query(eventUri, EVENT_PROJECTION, null, null, null);
 
 			// Use the cursor to step through the returned records
-			long id = -1;
 			while (eventCur.moveToNext()) {
 
-			    if (eventCur.isLast()) {
-			    	if(eventCur.getString(PROJECTION_TITLE_INDEX).equals(title) &&
-			    			eventCur.getLong(PROJECTION_DTSTART_INDEX) == dtstart) {
-			    		id = eventCur.getLong(PROJECTION_ID_INDEX);
-			    	}
-			    }
-			      
-			}
-			    
-			//TODO:if, for whatever reason the last row ins't the just added entry, do a query
-			    //for the row with the matching name and date (highly unlikely situation)
-			
-			
-			return id;
+				String _title = eventCur.getString(PROJECTION_TITLE_INDEX);
+				long _dtstart = eventCur.getLong(PROJECTION_DTSTART_INDEX);
+				if (title.equals(_title) && _dtstart == dtstart) {
+					id = eventCur.getLong(PROJECTION_ID_INDEX);
 
+				}
+			}
+		}
+
+		return id;
 	}
 
 	@TargetApi(14)

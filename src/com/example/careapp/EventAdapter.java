@@ -34,7 +34,7 @@ public class EventAdapter extends BaseAdapter {
 	public EventAdapter(Activity activity, ArrayList<HashMap<String, String>> eventList) {
 		this.activity = activity;
 		this.eventList = eventList;
-		inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater = (LayoutInflater) this.activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		headerPositions = getHeaderPositions(eventList);
 	}
 	/**

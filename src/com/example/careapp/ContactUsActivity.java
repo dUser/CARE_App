@@ -90,11 +90,13 @@ public class ContactUsActivity extends Activity {
 	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
-	    int listId = menuItem.getGroupId();
-	    //TODO:needs work to validate 
-	    if (menuItem.getItemId() == 1) { 
+		int PHONE = 1, 
+			EMAIL = 2, 
+			listId = menuItem.getGroupId();
+		
+	    //Don't need to validate Uris, I'm the one supplying the phones numbers and emails!
+	    if (menuItem.getItemId() == PHONE) { 
 	    	try {
-	    		//need to validate telephone, Uri doesn't throw an exception
 	    		Uri tele = Uri.parse("tel:" + contactUsMap.get(listId).get("phone"));
 	    		if (tele == null || (tele == Uri.EMPTY)) {
 	    			throw new Exception("Error: Invalid phone number.");
@@ -103,7 +105,7 @@ public class ContactUsActivity extends Activity {
 	    	} catch (Exception e) {
 	    		Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 	    	}
-	    } else if (menuItem.getItemId() == 2) {
+	    } else if (menuItem.getItemId() == EMAIL) {
 
 	    	try {
 	    		//need to validate webpage, Uri doesn't throw an exception

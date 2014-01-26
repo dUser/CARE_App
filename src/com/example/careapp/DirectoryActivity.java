@@ -136,9 +136,10 @@ public class DirectoryActivity extends Activity {
 	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem menuItem) {
-		//TODO:need to add validity checking
+		int LINK = 1, PHONE = 2;
+		//Don't need to validate I'm the one supplying the data from directory.txt
 	    int listId = menuItem.getGroupId();
-	    if (menuItem.getItemId() == 1) {
+	    if (menuItem.getItemId() == LINK) {
 	    	try {
 	    		Uri url = Uri.parse(directoryMap.get(listId).get("link"));
 	    		if (url == null || (url == Uri.EMPTY)) {
@@ -148,7 +149,7 @@ public class DirectoryActivity extends Activity {
 	    	} catch (Exception e) {
 	    		Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 	    	}
-	    } else if (menuItem.getItemId() == 2) {
+	    } else if (menuItem.getItemId() == PHONE) {
 	    	try {
 	    		Uri tele = Uri.parse("tel:" + directoryMap.get(listId).get("phone"));
 	    		if (tele == null || (tele == Uri.EMPTY)) {

@@ -359,7 +359,7 @@ public class EventsActivity extends Activity {
 		builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub	
+				// user clicked ok	
 			}
 		});
 		builder.create().show();

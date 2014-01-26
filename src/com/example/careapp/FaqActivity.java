@@ -17,7 +17,11 @@ import android.widget.Button;
  *
  */
 public class FaqActivity extends Activity {
+	
+	//stores whether or not the mentors view button was the last button clicked
 	boolean mentorsView;
+	
+	//colors (shades of blue) for selected of unselected buttons at top of page.
 	final int SELECTED   = 0xFF0099CC;
 	final int UNSELECTED = 0xFF8AD5F0;
 	
